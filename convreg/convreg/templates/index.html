@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NTC HQ - Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    {% load staticfiles %}
+	<link rel="stylesheet" href={% static "css/bootstrap.min.css" %} type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href={% static "css/bootstrap-responsive.min.css" %} type="text/css" media="screen" charset="utf-8">
+	
+
+	<link rel="stylesheet" href={% static "css/font-awesome.min.css" %} type="text/css" media="screen" charset="utf-8">	
+	<link href= {% static "css/ntchq.css" %} rel="stylesheet" media="screen">
+	
+  </head>
+  <body>
+	  <header id="header">
+	  	
+		  <div class="navbar  navbar-fixed-top navbar-inverse">
+		    <div class="navbar-inner">
+				
+		    
+			    <div class="container">
+ 
+			      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+			      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+					
+			      </a>
+				   <a class="brand brandsvg" href="#"></a>
+ 
+			      <!-- Be sure to leave the brand out there if you want it shown -->
+				
+     
+ 
+			      <!-- Everything you want hidden at 940px or less, place within here -->
+			      <div class="nav-collapse collapse">
+					     
+					      <ul class="nav">
+					        <li class="reg"><a href="{% url 'remain_single_form' %}"><i class="icon-pencil"></i> REGISTRATION</a></li>
+					        <li class="arrival" ><a href="#"><i class="icon-group"></i> ARRIVAL</a></li>
+					        <li class="cafe"><a href="#"><i class="icon-coffee"></i> CAFETERIA</a></li>
+							<li class="ministries"><a href="#"><i class="icon-bookmark"></i> MINISTRIES</a></li>
+							<li class="rooms"><a href="#"><i class="icon-home"></i> ROOMS</a></li>
+							<li class="events"><a href="#"><i class="icon-flag"></i> EVENTS</a></li>
+							
+					      </ul>
+						  
+						  <ul class="nav pull-right">
+							  <li class="search pull-right"><a href="#"><i class="icon-large icon-search"></i></a></li>
+							  <li class="dropdown">
+	                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-large icon-user"></i> <b class="caret"></b></a>
+	                          <ul class="dropdown-menu">
+	                            <li><a href="#"><i class="icon-star"></i> My Profile</a></li>
+								<li><a href="#"><i class="icon-key"></i> Change Password</a></li>
+	                            <li><a href="#"><i class="icon-book"></i> Reports</a></li>
+								<li><a href="#"><i class="icon-cogs"></i> System Info</a></li>
+								<li><a href="#"><i class="icon-medkit"></i> FAQ</a></li>
+	                            <li><a href="#"><i class="icon-signout"></i> Logout</a></li>
+	                          </ul>
+	                        </li>
+						  </ul>
+        
+			      </div>
+ 
+			    </div>
+	
+			
+			
+			
+		    </div>
+		  </div>
+		
+	  </header> 
+	  <!-- Mast head Logo -->
+	  <div class="row-fluid">
+		  <div class="mast-page cutout">
+			 <a href="#"><span class="image-wrap mastreg"><i class="icon-pencil mast-img"></i></a>
+		  </div>
+	  </div>
+	  <!-- Mast head Logo -->
+	  <div class="container ">
+
+		  
+	    <div class="row-fluid">
+			
+			 <div class="span12">
+				 <div class="well form-search ">
+            <fieldset>
+                <legend>Welcome to the Cornerstone Event
+                    Manager</legend>
+               
+                <p>
+                    Dear Brethren:
+                </p>
+                <p>
+                    We want to inform you about the availability of resources that will assist you as
+                    you manage the convention registration of your believers. We have set up a help
+                    page that has links to various documents that will be of use to you. We will be
+                    continuously updating this page with other resources as time permits.
+                </p>
+                <p>
+                    The help page can be found at the following URL: 
+                    <a id="ContentPlaceHolder1_HyperLink1" href="FAQ.aspx">Help &amp; FAQ</a>
+                </p>
+                <p>
+                    Before starting to enter the registration forms online, please visit the help page
+                    and use the following documents to guide you:</p>
+                <ul>
+                    <li>User Guide</li>
+                    <li>Lists: Type, Arrival Day, Transport
+                    
+                    </li>
+                </ul>
+                <p>
+                    Please use the latest version of any available browser. If you require any assistance,
+                    please email the development team at <a href="mailto:cornerstone@ntchq.org">cornerstone@ntchq.org</a>
+                </p>
+                <p>
+                    If you require immediate assistance, please call <strong>Sue George @ 551-587-8301.</strong>
+                </p>
+                <p>
+                    The Convention Registration Team.</p>
+            </fieldset>
+        </div>
+			 </div>
+		 </div>
+		 
+	 </div>
+				  
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src={% static "js/bootstrap.min.js" %}></script>
+  </body>
+</html>

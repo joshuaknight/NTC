@@ -6,7 +6,7 @@ from regmain import models
 class FamilySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Family
-        fields = ('id', )
+        fields = ('id', 'name' )
 
 
 class ChurchSerializer(serializers.HyperlinkedModelSerializer):

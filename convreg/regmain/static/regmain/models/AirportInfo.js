@@ -115,7 +115,7 @@ Airport.prototype.submit = function(){
 
 Airport.prototype.update_form_fields = function(){
 	if (this.container == null){
-		return false;
+		return false;	
 	}
 	this.flow_type = this.flow_type_id.value;
 	this.airport_code = this.airport_code_id.value;

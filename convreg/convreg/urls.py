@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from regmain import urls as regmain_urls
 
+from convreg import views
 
 urlpatterns = [
     # Examples:
@@ -14,4 +15,6 @@ urlpatterns = [
     url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
+    url(
+        r'^$', views.home.as_view(), name='home'),
 ]

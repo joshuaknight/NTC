@@ -79,4 +79,5 @@ urlpatterns = [
       urls.url(
         r'^pre_eve_map/$', views.pre_eve_map,
         name='pre_eve_map'),
+
 ]

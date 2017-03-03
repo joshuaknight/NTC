@@ -2,9 +2,12 @@ from django import shortcuts
 from django import http
 from django.views.decorators import csrf
 
+from django.views.generic import TemplateView
+
 import dateparser
 import constants
 from regmain import models
+
 
 
 def single_form(request):
