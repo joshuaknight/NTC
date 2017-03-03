@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Form{% endblock %}
+
+{% block main_content %}
+<div class="convreg-header" id="content" tabindex="-1">
+	<div class="container">
+		<div class="row">
+			<h1>Convention Registration</h1>
+			<p>Registration form integrated with ROCK RMS.</p>
+		</div>
+	</div>
+</div>
+
+<div class="container convreg-container">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">
+				<h1>Family Info</h1>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Search ROCK</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" name="txt_rock_family_name"
+								 id="txt_rock_family_name" />
+				</div>
+				<div class="col-sm-2">
+					<input type="button" name="btn_rock_family_name"
+								 value="Search" id="btn_rock_family_name" />
+				</div>
+			</div>
+
+			<div class="row">
+				<h3>New Family Info</h3>
+				<div class="col-sm-4">
+					<label>Name</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" name="txt_family_name"
+								 id="txt_family_name"/>
+				</div>
+				<div class="col-sm-4">
+					<input type="button" value="Create"
+								 id="btn_family_name" />
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">
+				<h1>Persons</h1>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="button" value="Add Person"
+								 id="btn_add_person_html" />
+				</div>
+			</div>
+
+			<div class="row" id="html_add_person_sec">												
+			</div>
+		</div>
+	</div>
+
+	<div class="row" id="additional" hidden>
+		<div class="col-md-9">
+			<div class="row">
+				<h1>Additional Info</h1>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Person</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" value="ID-Person Name" name="person" disabled>
+				</div>					
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Event</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" value="Event Name" name="event" disabled>
+				</div>									
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Primary Contact</label>
+					Yes <input type="checkbox" value="primary_contact" checked>
+					No <input type="checkbox" value="primary_contact" id="primary_contact">
+				</div>							
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Arrival</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="date"  name="arrival_date" id = "arrival_date">
+				</div>									
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Depature</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="date"  name="depature_date" id = "depature_date">
+				</div>									
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Do You have a Special Request ?</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="button" value="Add Speical Request" id="special_btn">
+				</div>						
+			</div>
+			<div class="row" id="html_add_special"></div>
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Transportation</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="button" value="Add Transportation" id="transport_btn">
+				</div>									
+			</div>			
+			<div class="row" id="html_add_transport"></div>
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="button" value="SUBMIT" id="additional_submit">
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+{% load staticfiles %}
+<script type="text/javascript" src={% static "regmain/base.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/person.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/model_church.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/contact.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/AirportInfo.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/att_types_id.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/specialrequest.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/transport.js" %}>
+</script>
+
+{% endblock %}
+

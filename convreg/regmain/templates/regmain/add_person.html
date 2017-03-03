@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Add Person{% endblock %}
+
+{% block main_content %}
+
+<form action="/regmain/add_person/" method="POST">
+  {% csrf_token %}
+
+	<label>First Name<input type="text" name="first_name" /></label>
+	<label>Last Name<input type="text" name="last_name" /></label>
+	<label>Date of Birth<input type="date" name="dob" /></label>
+
+	<label>Sex
+		  <input type="radio" name="sex" value="male" checked>Male
+			<input type="radio" name="sex" value="female">Female
+			<input type="radio" name="sex" value="transgender">Transgender
+	</label>
+
+	<label>Select Church
+	  <select name="church_id">
+		  {% for church in churches %}
+		    <option value="{{church.id}}">{{ church.name }}</option>
+		  {% endfor %}
+	  </select>
+	</label>
+
+	<label>Family ID
+		<a href="/regmain/add_family/" target="_blank">Create Family</a>
+		<input type="text" name="family_id" />
+	</label>
+
+	<label>Contact Info
+		<a href="/regmain/add_contact_info/"
+			 target="_blank">Add Contact Info</a>
+		<input type="text" name="contact_info_id" />
+	</label>
+
+	<label>Attendant Type
+		<select name="att_type_id">
+		  {% for att in att_types %}
+		    <option value="{{att.id}}">{{ att.att_type }}</option>
+		  {% endfor %}
+	  </select>
+	</label>
+
+	<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

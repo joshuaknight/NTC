@@ -1,0 +1,6 @@
+requests
+Django==1.8
+djangorestframework
+markdown
+django-filter
+dateparser

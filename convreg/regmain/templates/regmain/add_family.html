@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Add Contact Info{% endblock %}
+
+{% block main_content %}
+
+<form action="/regmain/add_contact_info/" method="POST">
+  {% csrf_token %}
+	<label>Name<textarea name="name" /></label>
+
+	<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Add Contact Info{% endblock %}
+
+{% block main_content %}
+ 
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src={% static "regmain/contact.js" %}></script>	
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">
+				<h1>Contact Info</h1>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Address</label>
+				</div>
+				<div class="col-sm-4">
+					<textarea type="text" name="address" id="address_id" cols="20" rows="10">
+					</textarea >
+				</div>				
+			</div>
+
+			<div class="row">							
+				<div class="col-sm-4">
+					<label>Cell</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" name="cell"
+								 id="cell_id" required>
+				</div>
+			</div>
+		
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Email</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="email" name="email" id="email_id" required>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label>Telephone</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" name="telephone" id="telephone_id" required>
+				</div>
+			</div>							
+			<div>
+				
+			<div class="row">
+			<div class="col-sm-2">
+					<input type="submit" value="Submit" id="btn_submit" />
+				</div>
+			</div>
+		</div>
+
+	 </div> 
+</div>
+{% endblock %}
