@@ -28,9 +28,10 @@ var html_add_person_sec = $(sel_html_add_person_sec)[0];
 var html_person_info_sec = $(sel_html_person_info_sec)[0];
 
 
+var contact_id = -1;
 var family_id = -1;
 var person_list = [];
-var family_list = [];
+
 
 
 var Family = function(){
@@ -46,30 +47,19 @@ function do_onload() {
 
 function search_family() {
 		$.ajax({
-			url : "/regmain/families/",
+			url : "/regmain/families/?format=json",
 			type : "GET",
 			dataType : "json",
-		}).done(function(json){
-			for ( i=0; i<json.length; i++) {
-					fam = new Family();
-					fam.id = json[i].id; 
-					fam.name = json[i].name;
-					family_list.push(fam);					
+		}).done(function(json){			
+			var found = 0;			
+			var entered_value = $(sear_txt_family)[0].value;					
+			for ( i=0; i<json.length; i++) {					
+					if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){							
+							console.log(json[i].name.toLowerCase())						
+							return;														
+					}		
 			}			
 		})
-		var x = $(sear_txt_family)[0].value;	
-		var y = 0;
-		for ( i=0; i<family_list.length; i++) {
-				if ( x == family_list[i].name ) {
-					y=1
-				}
-				else{
-					y=0
-				}
-				if ( y == 1){
-					return;
-				}
-		}
 }
 
 function add_person_html() {		

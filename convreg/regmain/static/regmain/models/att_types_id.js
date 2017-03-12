@@ -1,37 +1,49 @@
 var HTT = ''+
 		'<div class="row">' +
-		
 		'  <div class="row">' +
 		'    <div class="col-sm-4">' +
-		'		<select id = "vol_type_id">'+
-		'		<option value="" selected>........</option>'+
-		'		<option value="Serving Food">Serving Food</option>'+
-		'		<option value="Health Care">Health Care</option>'+		
+		'		<select id="vol_type_id">'+
 		'		</select>'+
 		'    </div>' +
 		'  </div>'+
 		'</div>' 
 
 
+
 var Attendance = function(){
-		this.id = null;
-		this.name = "";
+
+		
 		this.html_node = $(HTT)[0];
+
 		this.container = null;
+		
 		this.person = person_id;
+		
 		this.vol_type_id = null;
 }
 
 
+
 Attendance.prototype.render = function(container){
-		this.container = container;
-		container.appendChild(this.html_node);
-		this.bind_inputs();
+		this.container = container;				
+		this.vol_type_id = $(this.html_node).find("#vol_type_id")[0];						
+		var select = this.vol_type_id;
+		$.ajax({
+				url : '/regmain/volunteer_types/?format=json',
+				type : "GET",
+				dataType : "json",
+		}).done(function(json){													
+				for (var i = 0; i < json.length; i++) {
+						var opt = json[i];
+						var ele = document.createElement("option");
+						ele.textContent = opt.id+"."+opt.name;
+						ele.value = opt.id;
+						select.appendChild(ele);	
+				}																		
+		});										
+		this.container.appendChild(this.html_node);
 }
 
-Attendance.prototype.bind_inputs = function(){
-		this.vol_type_id = $(this.html_node).find("#vol_type_id")[0];		
-}
 
 Attendance.prototype.submit = function(){
 		if (this.container == null){

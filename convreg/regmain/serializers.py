@@ -67,7 +67,7 @@ class VolunteerTypeSerializer(
 
     class Meta:
         model = models.VolunteerType
-        fields = ('name', 'desc')
+        fields = ('id','name')
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):

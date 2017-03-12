@@ -1,5 +1,6 @@
 // Person model
 var person_id = null;
+var flag_volunteer = 0;
 
 var TMPL_PERSON = '' +
 		'<div class="container">' +
@@ -70,8 +71,7 @@ var TMPL_PERSON = '' +
 		'      <label>Church Info</label>' +
 		'    </div>' +
 		'    <div class="col-sm-4">' +
-		'		<select id = "add_church_btn">'+
-		
+		'		<select id = "add_church_btn">'+		
 		'		</select>'+
 		'    </div>'  +
 		' </div>'+
@@ -132,7 +132,7 @@ var Person = function(family_id) {
 		this.vol_type_id = null;
 
 		this.add_church_btn = null;	
-
+		
 
 		this.html_add_special = null;
 		this.add_transport_btn = null;	
@@ -148,25 +148,26 @@ var Person = function(family_id) {
 		this.primary_contact = null;
 		this.arrival_date = null;
 		this.depature_date = null;
-
-
-		this.me = this;
+		
 
 		this.airport = null;
 		this.contact = null;
 		this.att_type = null;
+		this.church = null;
 }
 
 
 Person.prototype.all_in_one_submit = function(){		
 		if ( this.airport != null && this.contact != null 
 			 && this.att_type != null ){
-			this.airport.submit();
+			this.airport.submit();			
 			this.contact.submit();
 			this.att_type.submit();
+			this.church_id = this.church.return_id();
+			this.contact_info_id = contact_id;		
 		}				
 		else {
-			return false;
+			return false;	
 		}
 }
 
@@ -185,8 +186,7 @@ Person.prototype.update_values_from_form = function() {
 		this.last_name = this.txt_last_name.value;
 		this.sex = this.txt_sex.value;
 		this.dob = this.txt_dob.value;
-		this.att_type_id = this.vol_type_id.value;
-		this.contact_info_id = contact_id;
+		this.att_type_id = this.vol_type_id.value;				
 		return true;
 }
 
@@ -209,10 +209,7 @@ Person.prototype.update_html_fields = function() {
 Person.prototype.submit = function() {				
 		if (this.container === null) {
 				return false;
-		}
-		if (contact_id != null){
-			this.contact_info_id = contact_id;			
-		} 				
+		}			
 		this.update_values_from_form();
 		p = this;
 
@@ -222,7 +219,7 @@ Person.prototype.submit = function() {
 						first_name: this.first_name,
 						last_name : this.last_name,
 						dob : this.dob,
-						sex : this.sex,
+						sex : this.sex,	
 						contact_info_id : this.contact_info_id,
 						family_id : this.family_id,
 						church_id : this.church_id,
@@ -297,10 +294,16 @@ Person.prototype.bind_inputs = function() {
 		$(this.vol_type_id).on(
 				"click",
 				function() {
-						if(p.vol_type_id.value == 'Worker' ||
-							 p.vol_type_id.value == 'Volunteer' ){
-								p.volunteer_type();
+						if( p.vol_type_id.value == 'Worker' ||
+							 p.vol_type_id.value == 'Volunteer'){
+								if (flag_volunteer == 0) {								
+									p.volunteer_type();
+									flag_volunteer=1;
+							}
 						}
+						//if(p.vol_type_id.value == 'Normal'){
+						//		pass
+						//}
 				});
 		$(this.btn_submit).on("click",function(){
 					p.all_in_one_submit();
@@ -327,24 +330,24 @@ Person.prototype.add_contact_html = function(){
 }
 
 Person.prototype.volunteer_type = function(){	
-	this.att_type = new Attendance();
-	this.att_type.render(this.html_att_type);
+		this.att_type = new Attendance();
+		this.att_type.render(this.html_att_type);
 }
 
 Person.prototype.church_select = function(){
-	church = new Churches();				
-    church.initialize(this.add_church_btn,this.add_option_church);	        
+		this.church = new Churches();				
+	    this.church.initialize(this.add_church_btn);	        
 }	
 
 
 Person.prototype.special_request = function(){	
-	pre_eve_map = new Mapping_person();
-	pre_eve_map.render(this.html_add_special);
+		pre_eve_map = new Mapping_person();
+		pre_eve_map.render(this.html_add_special);
 }
 
 Person.prototype.transport = function(){
-	trans = new Transport();
-	trans.render(this.html_transport);
+		trans = new Transport();
+		trans.render(this.html_transport);
 }
 
 Person.prototype.additional_sub = function(){

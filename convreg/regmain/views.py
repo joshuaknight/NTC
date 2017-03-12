@@ -135,7 +135,7 @@ def att_type(request):
     context = {}
     if request.method == 'POST':
         name = request.POST['name']
-        person_inst = PersonInfo.objects.get(id = pk)
+        person_inst = models.PersonInfo.objects.get(id = pk)
         x = models.Event.objects.get(id = 1);
         x = models.PersonVolunteer(person = person_inst,activity = name,event = x)
         x.save()

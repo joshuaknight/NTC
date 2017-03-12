@@ -163,7 +163,7 @@ class PersonInfo(models.Model):
 class VolunteerType(models.Model):
 
     name = models.CharField(max_length=255)
-    #desc = models.TextField
+    
 
     class Meta:
         app_label = constants.APP_LABEL
