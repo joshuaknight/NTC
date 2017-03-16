@@ -12,8 +12,15 @@ var sel_add_airport_btn = "#add_airport_btn";
 var sel_html_add_airport = "#html_add_airport"; 
 var sel_html_add_contact = "#html_add_contact";
 
+var person_container = "#add_person_html_impt";
+
+
+var searched_family_list = "#searched_family_list";
+
 var sel_add_contact_btn = "#add_contact_btn";
 
+
+var html_searched_family_list = $(searched_family_list)[0];
 
 var html_add_contact = $(sel_html_add_contact)[0];	
 
@@ -24,24 +31,21 @@ var txt_family_name = $(sel_txt_family_name)[0];
 var btn_family_name = $(sel_btn_family_name)[0];
 
 var btn_add_person_html = $(sel_btn_add_person_html)[0];
+
 var html_add_person_sec = $(sel_html_add_person_sec)[0];
+
 var html_person_info_sec = $(sel_html_person_info_sec)[0];
 
+var html_person_add = $(person_container)[0];
 
-var contact_id = -1;
+
 var family_id = -1;
 var person_list = [];
-
-
-
-var Family = function(){
-		this.id = null;
-		this.name = null;
-}
+var contact_id = -1;
+var found_family = 0;
 
 function do_onload() {			
-		$(sel_btn_family_name).on("click", add_family_submit);
-		$(sel_btn_add_person_html).on("click", add_person_html);
+		$(sel_btn_family_name).on("click", add_family_submit);		
 		$(btn_rock_family_name).on("click",search_family);
 }
 
@@ -50,36 +54,35 @@ function search_family() {
 			url : "/regmain/families/?format=json",
 			type : "GET",
 			dataType : "json",
-		}).done(function(json){			
-			var found = 0;			
-			var entered_value = $(sear_txt_family)[0].value;					
-			for ( i=0; i<json.length; i++) {					
-					if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){							
-							console.log(json[i].name.toLowerCase())						
-							return;														
-					}		
-			}			
+		}).done(function(json){										
+			var entered_value = $(sear_txt_family)[0].value;				
+			if ( found_family == 0 ){
+				for ( i=0; i<json.length; i++) {					
+						if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){									
+								var ele = document.createElement("li");
+								var textnode = document.createTextNode(json[i].name); 							
+								ele.appendChild(textnode);
+								html_searched_family_list.appendChild(ele);
+								found_family = 1;
+								return;														
+						}		
+				}
+				if ( found_family == 0 ){
+						alert("No Family Found");
+				}
+			} 			
 		})
 }
 
-function add_person_html() {		
+function add_person_html() {				
 		person = new Person(family_id);
 		person.render(html_add_person_sec);
 }
 
 
-function add_family_submit(event) {
-		$.ajax({
-			url: "/regmain/add_family/",
-			data: {
-				name: txt_family_name.value
-			},	
-			type: "POST",
-			dataType: "json"
-		}).done(function(json) {
-			family_id = json.id;
-			//update_form_field();
-		})
+function add_family_submit(event) {		
+		fam = new Family();
+		fam.render(html_person_add);
 }
 
 do_onload();

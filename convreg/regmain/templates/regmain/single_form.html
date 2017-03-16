@@ -32,7 +32,9 @@
 								 value="Search" id="btn_rock_family_name" />
 				</div>
 			</div>
-
+			<div class="row" id="searched_family">
+				<ul id="searched_family_list"></ul>				
+			</div>
 			<div class="row">
 				<h3>New Family Info</h3>
 				<div class="col-sm-4">
@@ -53,20 +55,9 @@
 
 	<div class="row">
 		<div class="col-md-9">
-			<div class="row">
-				<h1>Persons</h1>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-4">
-					<input type="button" value="Add Person"
-								 id="btn_add_person_html" />
-				</div>
-			</div>
-
-			<div class="row" id="html_add_person_sec">												
-			</div>
-		</div>
+			<div class="row" id="add_person_html_impt"> </div>
+			<div class="row" id="html_add_person_sec"> </div>
+		</div>			
 	</div>
 
 	<div class="row" id="additional" hidden>
@@ -167,6 +158,8 @@
 <script type="text/javascript" src={% static "regmain/models/specialrequest.js" %}>
 </script>
 <script type="text/javascript" src={% static "regmain/models/transport.js" %}>
+</script>
+<script type="text/javascript" src={% static "regmain/models/family_model.js" %}>
 </script>
 
 {% endblock %}

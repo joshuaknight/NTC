@@ -113,10 +113,11 @@ Contact.prototype.submit = function(){
 		return true;
 }	
 
+
 Contact.prototype.update_values_from_field = function() {
 		if (this.container === null) {
 			return false;
-		}
+		}		
 		this.address = this.address_id.value;
 		this.cell = this.cell_phone_id.value;
 		this.email = this.email_id.value;

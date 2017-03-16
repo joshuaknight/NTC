@@ -2,6 +2,7 @@
 var person_id = null;
 var flag_volunteer = 0;
 
+
 var TMPL_PERSON = '' +
 		'<div class="container">' +
 		'  <div class="row">' +
