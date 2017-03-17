@@ -14,6 +14,7 @@ var sel_html_add_contact = "#html_add_contact";
 
 var person_container = "#add_person_html_impt";
 
+var add_person_after_submit = "#add_person_after_submit";
 
 var searched_family_list = "#searched_family_list";
 
@@ -39,9 +40,10 @@ var html_person_info_sec = $(sel_html_person_info_sec)[0];
 var html_person_add = $(person_container)[0];
 
 
+var html_add_person_after_submit_container = $(add_person_after_submit)[0];
+
 var family_id = -1;
 var person_list = [];
-var contact_id = -1;
 var found_family = 0;
 
 function do_onload() {			
@@ -84,5 +86,6 @@ function add_family_submit(event) {
 		fam = new Family();
 		fam.render(html_person_add);
 }
+
 
 do_onload();

@@ -71,7 +71,7 @@ Contact.prototype.render = function(container){
 Contact.prototype.bind_all = function(){
 		if (this.container == null){
 			return false;
-		}
+		}		
 		this.address_id = $(this.html_node).find("#address_id")[0];
 		this.cell_phone_id = $(this.html_node).find("#cell_phone_id")[0];
 		this.email_id = $(this.html_node).find("#email_id")[0];
@@ -86,15 +86,49 @@ Contact.prototype.bind_all = function(){
 		return true;
 }
 
+
+
+Contact.prototype.update_html_fields = function(){				
+		this.address_id.value = this.address;
+		this.cell_phone_id.value = this.cell;
+		this.email_id.value = this.email;
+		this.telephone_id.value = this.telephone;
+}
+
+
+Contact.prototype.process_response_contact = function(json){
+		this.id = json.id;
+		this.address = json.address;
+		this.cell = json.cell_phone;
+		this.email = json.email;
+		this.telephone = json.telephone;			
+		this.update_html_fields();
+		
+}	
+
+
+Contact.prototype.update_values_from_field = function() {
+		if (this.container === null) {
+			return false;
+		}		
+
+		this.address = this.address_id.value;
+		this.cell = this.cell_phone_id.value;
+		this.email = this.email_id.value;
+		this.telephone = this.telephone_id.value;
+		return true;
+}	
+
+
 Contact.prototype.submit = function(){
 		if( this.container == null){
 			return false;			
 		}		
-
-		p = this;
-		
-		this.update_values_from_field();		
-
+		var p = this;
+		var tmp_process_resp_fn = function(json) {				
+				p.process_response_contact(json);
+		};
+		this.update_values_from_field();				
 		$.ajax({
 			url: "/regmain/add_contact_info/",
 			data: {										
@@ -105,40 +139,14 @@ Contact.prototype.submit = function(){
 			},
 			type: "POST",
 			dataType: "json",
-		}).done(function(json)
-		{					
-			contact_id = json.id; 		
-			p.process_response(json);
-		});
+		}).done(tmp_process_resp_fn);		
 		return true;
 }	
 
 
-Contact.prototype.update_values_from_field = function() {
-		if (this.container === null) {
-			return false;
-		}		
-		this.address = this.address_id.value;
-		this.cell = this.cell_phone_id.value;
-		this.email = this.email_id.value;
-		this.telephone = this.telephone_id.value;
-		return true;
-}	
 
-Contact.prototype.process_response = function(json){
-		
-		this.id = json.id;
-		this.address = json.address;
-		this.cell = json.cell_phone;
-		this.email = json.email;
-		this.telephone = json.telephone;			
-		this.update_html_fields();
-		
-}	
 
-Contact.prototype.update_html_fields = function(){
-		this.address_id.value = this.address;
-		this.cell_phone_id.value = this.cell;
-		this.email_id.value = this.email;
-		this.telephone_id.value = this.telephone;
+Contact.prototype.return_id = function(){
+		console.log(this.container);
+		return this.container.value;
 }

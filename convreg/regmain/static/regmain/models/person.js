@@ -83,9 +83,9 @@ var TMPL_PERSON = '' +
 		'    	</div>' +
 		'		<div class="col-sm-4">' +
 		'		<select id = "vol_type_id">'+
-		'		<option value="Normal">Normal</option>'+
-		'		<option value="Worker">Worker</option>'+
-		'		<option value="Volunteer">Volunteer</option>'+
+		'		<option value="1">Normal</option>'+
+		'		<option value="2">Worker</option>'+
+		'		<option value="3">Volunteer</option>'+
 		'		</select>'+
 		'    	</div>' +
 		'		<div class="col-sm-4" id="html_att_type"> </div>'+
@@ -109,10 +109,7 @@ var Person = function(family_id) {
 		this.last_name = "";
 		this.dob = null;
 		this.sex = null;
-		this.church_id = null;
-		this.family_id = family_id;
-		this.contact_info_id = null;
-		this.att_type_id = null;
+
 
 		this.container = null;
 		this.html_node = $(TMPL_PERSON)[0];
@@ -150,11 +147,23 @@ var Person = function(family_id) {
 		this.arrival_date = null;
 		this.depature_date = null;
 		
+		this.airport_info_id = null;
+		this.church_id = null;
+		this.family_id = family_id;
+		this.contact_info_id = null;
+		this.att_type_id = null;
 
 		this.airport = null;
 		this.contact = null;
 		this.att_type = null;
 		this.church = null;
+
+
+
+		this.container_for_appending_html_to_person = null;
+		this.html_to_be_append_for_appending_person = null;
+		this.to_be_populated_with_family = null;
+		this.to_be_populated_with_person = null;
 }
 
 
@@ -162,10 +171,11 @@ Person.prototype.all_in_one_submit = function(){
 		if ( this.airport != null && this.contact != null 
 			 && this.att_type != null ){
 			this.airport.submit();			
-			this.contact.submit();
-			this.att_type.submit();
-			this.church_id = this.church.return_id();
-			this.contact_info_id = contact_id;		
+			this.contact.submit();											
+			this.contact_info_id = this.contact.id;
+			this.airport_info_id = this.airport.id;			
+		//	this.att_type.submit();
+			this.church_id = this.church.return_id();			
 		}				
 		else {
 			return false;	
@@ -180,7 +190,7 @@ Person.prototype.render = function(container) {
 
 Person.prototype.update_values_from_form = function() {
 		if (this.container === null) {
-				return false;
+				return false;	
 		}
 
 		this.first_name = this.txt_first_name.value;
@@ -201,8 +211,8 @@ Person.prototype.process_response = function(json) {
 }
 
 Person.prototype.update_html_fields = function() {
-		this.txt_first_name.value = this.first_name;
-		this.txt_last_name.value = this.last_name;
+		this.txt_first_name = this.first_name;
+		this.txt_last_name = this.last_name;
 		this.txt_sex = this.sex;
 		this.txt_dob = this.dob;
 }
@@ -210,7 +220,7 @@ Person.prototype.update_html_fields = function() {
 Person.prototype.submit = function() {				
 		if (this.container === null) {
 				return false;
-		}			
+		}		
 		this.update_values_from_form();
 		p = this;
 
@@ -231,6 +241,7 @@ Person.prototype.submit = function() {
 		}).done(function(json) {
 				p.process_response(json);
 		});		
+		p.append_person_to_html();
 }
 
 Person.prototype.bind_inputs = function() {
@@ -295,8 +306,8 @@ Person.prototype.bind_inputs = function() {
 		$(this.vol_type_id).on(
 				"click",
 				function() {
-						if( p.vol_type_id.value == 'Worker' ||
-							 p.vol_type_id.value == 'Volunteer'){
+						if( p.vol_type_id.value == '1' ||
+							 p.vol_type_id.value == '2'){
 								if (flag_volunteer == 0) {								
 									p.volunteer_type();
 									flag_volunteer=1;
@@ -306,7 +317,7 @@ Person.prototype.bind_inputs = function() {
 						//		pass
 						//}
 				});
-		$(this.btn_submit).on("click",function(){
+		$(this.btn_submit).on("click",function(){					
 					p.all_in_one_submit();
 					p.submit();
 		});
@@ -321,7 +332,6 @@ Person.prototype.bind_inputs = function() {
 
 Person.prototype.add_airport_html = function(){
 		this.airport = new Airport();
-
 		this.airport.render(this.html_add_airport);
 }
 
@@ -374,3 +384,68 @@ Person.prototype.update_fields_additional = function(){
 }
 
 
+
+
+
+var person_html_to_append = '<div class = "container">'+
+							'	<div class="row">'+
+							'		<div class="col-sm-4">'+
+							'			<ul id="to_be_populated_with_family">'+
+							'			</ul>'+		
+							'			<ul id="to_be_populated_with_person">'+
+							'			</ul>'+						
+							'		</div>'+
+							'	</div>'+
+							'</div>'
+
+
+
+Person.prototype.append_of_family = function(fam){
+		$.ajax({
+			url : '/regmain/families/',
+			dataType : 'json',
+			type : 'GET',
+		}).done(function(json){
+				for (var i = 0; i < json.length; i++) {
+					if ( family_id == json[i].id ){	
+						var textnode = document.createTextNode("Family " + json[i].name); 							
+						var ele = document.createElement("li");
+						ele.appendChild(textnode);						
+						fam.appendChild(ele);
+						return;
+					}
+				}
+		});		
+}
+
+Person.prototype.append_of_person = function(per){
+		$.ajax({
+			url : '/regmain/person_infos',
+			dataType : 'json',
+			type : 'GET',
+		}).done(function(json){
+				for (var i = 0; i < json.length; i++) {
+					if ( family_id == json[i].family ) {
+						var textnode = document.createTextNode("Person " + json[i].first_name);
+						var ele = document.createElement("li");
+						ele.appendChild(textnode);						
+						per.appendChild(ele);						
+					}
+				}
+		});		
+}
+
+Person.prototype.append_person_to_html = function(){
+		this.container_for_appending_html_to_person = html_add_person_after_submit_container;
+		this.html_to_be_append_for_appending_person = $(person_html_to_append)[0];		
+		
+		this.to_be_populated_with_family = $(this.html_to_be_append_for_appending_person).find(
+											'#to_be_populated_with_family')[0];			
+		this.to_be_populated_with_person = $(this.html_to_be_append_for_appending_person).find(
+											'#to_be_populated_with_person')[0];	
+		
+		this.append_of_family(this.to_be_populated_with_family);
+		this.append_of_person(this.to_be_populated_with_person);
+
+		this.container_for_appending_html_to_person.appendChild(this.html_to_be_append_for_appending_person);
+}

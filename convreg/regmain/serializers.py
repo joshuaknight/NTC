@@ -58,7 +58,7 @@ class PersonInfoSerializer(
     class Meta:
         model = models.PersonInfo
         fields = (
-            'first_name', 'last_name', 'dob', 'sex', 'church'
+            'first_name', 'last_name', 'dob', 'sex', 'church',
             'family', 'contact_info', 'att_type')
 
 

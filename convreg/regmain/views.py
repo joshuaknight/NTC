@@ -56,7 +56,7 @@ def add_contact_info(request):
             cell_phone=cell_phone,
             email=email,
             telephone=telephone)
-        contact_info.save()
+        contact_info.save()        
         return http.JsonResponse(contact_info.to_dict())
 
 
@@ -132,13 +132,13 @@ def churches(request):
 
 @csrf.csrf_exempt        
 def att_type(request):    
-    if request.method == 'GET':
+    if request.method == 'POST':
         name = request.POST['name']
         person_inst = models.PersonInfo.objects.get(id = id)
         x = models.Event.objects.get(id = 1);
-        x = models.PersonVolunteer(person = person_inst,activity = name,event = x)
-        x.save()
-        return http.JsonResponse(x.to_dict())
+        y = models.PersonVolunteer(person = person_inst,activity = name,event = x)
+        y.save()
+        return http.JsonResponse(y.to_dict())
 
 
 @csrf.csrf_exempt

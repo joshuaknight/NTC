@@ -151,7 +151,7 @@ class PersonInfo(models.Model):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'dob': self.dob.strftime('%y-%m-%d'),
+            'dob': self.dob,
             'sex': self.sex,
             'church_id': self.church.id,
             'family_id': self.family.id,
