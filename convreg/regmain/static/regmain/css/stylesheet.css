@@ -1,0 +1,18 @@
+#family_report_message{
+		color: red;		
+}
+
+.navbar{		
+		padding-left:30px;
+		padding-right:10px;		
+}
+
+#create_family_container{
+		visibility:hidden;
+}
+
+
+.form-control{
+		padding-top:20px;
+		padding-bottom:20px;
+}

@@ -2,7 +2,7 @@ var HTT = ''+
 		'<div class="row">' +
 		'  <div class="row">' +
 		'    <div class="col-sm-4">' +
-		'		<select id="vol_type_id">'+
+		'		<select id="vol_type_id" class="form-control">'+
 		'		</select>'+
 		'    </div>' +
 		'  </div>'+

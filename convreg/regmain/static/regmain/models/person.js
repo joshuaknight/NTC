@@ -10,8 +10,8 @@ var TMPL_PERSON = '' +
 		'      <label>First Name</label>' +
 		'    </div>' +
 		'    <div class="col-sm-4">' +
-		'      <input type="text" name="txt_first_name" ' +
-		'             class="txt_first_name" />' +
+		'      <input type="text" placeholder="First name" name="txt_first_name" ' +
+		'             id="txt_first_name" class="form-control" />' +
 		'    </div>' +
 		'  </div>' +
 
@@ -21,7 +21,7 @@ var TMPL_PERSON = '' +
 		'    </div>' +
 		'    <div class="col-sm-4">' +
 		'      <input type="text" name="txt_last_name" ' +
-		'             class="txt_last_name" />' +
+		'             id="txt_last_name" class="form-control" placeholder="Last name" />' +
 		'    </div>' +
 		'  </div>' +
 
@@ -29,10 +29,10 @@ var TMPL_PERSON = '' +
 		'    <div class="col-sm-4">' +
 		'      <label>Gender</label>' +
 		'    </div>' +
-		'    <div class="txt_sex col-sm-4">' +
-		'<input type="radio" name="sex" class="txt_sex" value="male">Male'+
-		'<input type="radio" name="sex" class="txt_sex" value="female">Female'+
-		'<input type="radio" name="sex" class="txt_sex" value="transgender">Transgender'+
+		'    <div id="txt_sex" class="radio">' +		
+		'	<label> <input 	type="radio" name="sex" id="txt_sex" value="male">Male </label>'+
+		'	<label> <input type="radio" name="sex" id="txt_sex" value="female">Female</label>'+
+		'	<label> <input type="radio" name="sex" id="txt_sex" value="transgender">Transgender</label>'+		
 		'    </div>' +
 		'  </div>' +
 
@@ -41,8 +41,8 @@ var TMPL_PERSON = '' +
 		'      <label>Date of Birth</label>' +
 		'    </div>' +
 		'    <div class="col-sm-4">' +
-		'      <input type="date" name="txt_dob" ' +
-		'             class="txt_dob" />' +
+		'      <input type="date"  class="form-control" name="txt_dob" ' +
+		'             id="txt_dob" />' +
 		'    </div>' +
 		'  </div>' +
 
@@ -51,7 +51,7 @@ var TMPL_PERSON = '' +
 		'      	<label>Airport Info</label>'+
 		'    	</div>' +
 		'		<div class="col-sm-4">' +
-		'		<input type="button" value="Add Airport Info" id="add_airport_btn"/>' +
+		'		<input type="button" class="btn btn-primary" value="Add Airport Info" id="add_airport_btn"/>' +
 		'    	</div>' +
 		'  </div>' +
 
@@ -62,7 +62,7 @@ var TMPL_PERSON = '' +
 		'      	<label>Contact Info</label>'+
 		'    	</div>' +
 		'		<div class="col-sm-4">' +
-		'		<input type="button" id="add_contact_btn" value="Contact Info">'+
+		'		<input type="button"  class="btn btn-primary" id="add_contact_btn" value="Add Contact Info">'+
 		'    	</div>' +
 		'  </div>' +		
 		' <div class="row" id="html_contact_info"></div>'+
@@ -72,7 +72,7 @@ var TMPL_PERSON = '' +
 		'      <label>Church Info</label>' +
 		'    </div>' +
 		'    <div class="col-sm-4">' +
-		'		<select id = "add_church_btn">'+		
+		'		<select class="form-control" id = "add_church_btn">'+		
 		'		</select>'+
 		'    </div>'  +
 		' </div>'+
@@ -82,7 +82,7 @@ var TMPL_PERSON = '' +
 		'      	<label>Attendance Type</label>'+
 		'    	</div>' +
 		'		<div class="col-sm-4">' +
-		'		<select id = "vol_type_id">'+
+		'		<select id = "vol_type_id" class="form-control">'+
 		'		<option value="1">Normal</option>'+
 		'		<option value="2">Worker</option>'+
 		'		<option value="3">Volunteer</option>'+
@@ -93,7 +93,7 @@ var TMPL_PERSON = '' +
 
 		'  <div class="row">' +
 		'    <div class="col-sm-4">' +
-		'      <input type="button" value="Submit" class="btn_person_submit"/>' +
+		'      <input type="button" value="Submit" class="btn btn-success" id="btn_person_submit"/>' +
 		'    </div>' +
 		'  </div>' +
 		'</div>'
@@ -250,13 +250,13 @@ Person.prototype.bind_inputs = function() {
 		}
 
 		this.txt_first_name = $(this.html_node).find(
-				'input.txt_first_name')[0];
+				'#txt_first_name')[0];
 		this.txt_last_name = $(this.html_node).find(
-				'input.txt_last_name')[0];
+				'#txt_last_name')[0];
 		this.txt_sex = $(this.html_node).find(
-				'input.txt_sex')[0];
+				'#txt_sex')[0];
 		this.txt_dob = $(this.html_node).find(
-				'input.txt_dob')[0];		
+				'#txt_dob')[0];		
 
 		this.html_add_airport = $(this.html_node).find(
 				'#html_add_airport')[0];
@@ -269,7 +269,7 @@ Person.prototype.bind_inputs = function() {
 				'#add_contact_btn')[0];
 
 		this.btn_submit = $(this.html_node).find(
-				'input.btn_person_submit')[0];
+				'#btn_person_submit')[0];
 
 		this.vol_type_id = $(this.html_node).find(
 				'#vol_type_id')[0];
@@ -406,7 +406,7 @@ Person.prototype.append_of_family = function(fam){
 		}).done(function(json){
 				for (var i = 0; i < json.length; i++) {
 					if ( family_id == json[i].id ){							
-						var textnode = document.createTextNode("Family " + json[i].name); 							
+						var textnode = document.createTextNode("Family - " + json[i].name); 							
 						var ele = document.createElement("li");
 						ele.appendChild(textnode);						
 						fam.appendChild(ele);
@@ -424,7 +424,7 @@ Person.prototype.append_of_person = function(per){
 		}).done(function(json){
 				for (var i = 0; i < json.length; i++) {				
 					if ( family_id == json[i].family ) {
-						var textnode = document.createTextNode("Person " + json[i].first_name);
+						var textnode = document.createTextNode("Person - " + json[i].first_name);
 						var ele = document.createElement("li");
 						ele.appendChild(textnode);						
 						per.appendChild(ele);						

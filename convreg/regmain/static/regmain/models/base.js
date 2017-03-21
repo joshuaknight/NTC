@@ -49,8 +49,7 @@ var html_searched_family_success_person_add = $(searched_family_success_person_a
 var family_id = -1;
 var person_list = [];
 var found_family = 0;
-
-
+var temp_family_id = -1;
 var flag_volunteer= 0;
 
 
@@ -70,11 +69,12 @@ function search_family() {
 				for ( i=0; i<json.length; i++) {					
 						if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){																	
 								found_family = 1;
-								var ele = document.createElement('button');								
+								var ele = document.createElement('a');								
 								ele.setAttribute("id", "search_family_add_person_list");
 						        //var textnode = 						        
 						        //ele.setAttribute('href', "/regmain/family_person_list/" + json[i].name);						        
-						        ele.innerHTML = "Found family " + json[i].name;
+						        ele.innerHTML = "Found Family - " + json[i].name;
+						        temp_family_id=json[i].id;
 						        //ele.appendChild(textnode);
 						        html_searched_family_list.appendChild(ele);
 								break;														
@@ -90,28 +90,44 @@ function search_family() {
 							type :'GET',
 							dataType :'json',						
 					}).done(function(json){																									
-						var size = Object.keys(json).length												
-						for (var i = 0; i < size ; i++){																					
-								var ele = document.createElement('button');
+						var size = Object.keys(json).length				
+						console.log(size);																			
+						for (var i = 1; i < size ; i++){																					
+								var ele = document.createElement('li');								
 								ele.innerHTML = "Person"+"-"+json['first_name'];
 								html_searched_family_success_person_add.appendChild(ele);
 						}
 					});
+					var person_btn = $("#add_person_btn_in_family_search")[0];
+					var ele = document.createElement('button');
+					ele.setAttribute("id","add_person_btn_in_family_search_btn");
+					ele.innerHTML = "Add another Person";
+					person_btn.appendChild(ele);					
+					var person_btn_btn = $("#add_person_btn_in_family_search_btn")[0];
+					$(person_btn_btn).on('click',function(){
+							add_person_html(temp_family_id);
+					});
 			});
+
 		});
 }
 
-function add_person_html() {			
-		flag_volunteer = 0;
+function add_person_html(family_id) {			
+		flag_volunteer = 0;				
 		person = new Person(family_id);
 		person.render(html_add_person_sec);
-		person.church_select();
+		person.church_select();		
 }
 
 
 function add_family_submit(event) {		
 		fam = new Family();
 		fam.render(html_person_add);
+}	
+
+function append_family(){		
+		var container = $("#create_family_container")[0];
+		container.style.visibility='visible';
 }
 
 

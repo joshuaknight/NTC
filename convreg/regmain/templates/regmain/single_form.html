@@ -6,60 +6,70 @@
 
 {% block main_content %}
 <div class="convreg-header" id="content" tabindex="-1">
-	<div class="container">
+	<div class="container"> 
 		<div class="row">
 			<h1>Convention Registration</h1>
-			<p>Registration form integrated with ROCK RMS.</p>
+			<!-- <p>Registration form integrated with ROCK RMS.</p> -->
 		</div>
 	</div>
 </div>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">	    
+    <div class="navbar-header">      
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="#">Home<span class="sr-only">(current)</span></a></li>
+        <li > <a href="#" onclick="append_family();">Create Family </a></li>
+      </ul>
+      <div class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" id="txt_rock_family_name" 
+          				name="txt_rock_family_name" placeholder="Search Family">
+        </div>
+        <button type="submit" id="btn_rock_family_name" name="btn_rock_family_name" class="btn btn-primary">Search</button>
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 <div class="container convreg-container">
 	<div class="row">
-		<div class="col-md-9">
-			<div class="row">
-				<h1>Family Info</h1>
+		<div class="col-md-9">			
+			
+			<div class="row">				
+				<ul id="searched_family_list"></ul>								
 			</div>
 
-			<div class="row">
-				<div class="col-sm-4">
-					<label>Search ROCK</label>
-				</div>
-				<div class="col-sm-4">
-					<input type="text" name="txt_rock_family_name"
-								 id="txt_rock_family_name" />
-				</div>
-				<div class="col-sm-2">
-					<input type="button" name="btn_rock_family_name"
-								 value="Search" id="btn_rock_family_name" />
-				</div>
-
+			<div class="row">			
+				<ul id="searched_family_success_person_add"></ul>								
 			</div>
 
-			<div class="row">
-				<div class="col-sm-4">							
-				<ul id="searched_family_list"></ul>				
-				</div>
+			<div class="row">			
+				<ul id="add_person_btn_in_family_search"></ul>								
 			</div>
 
-			<div class="row">
-				<div class="col-sm-4">							
-				<ul id="searched_family_success_person_add"></ul>				
-				</div>
-			</div>
-
-			<div class="row">
+			<div class="row" id="create_family_container">
 				<h3>New Family Info</h3>
-				<div class="col-sm-4">
-					<label>Name</label>
+				<form class="form-inline">
+				<div class="form-group">				 
+					<div class="input-group">			      
+			      		<input type="text" class="form-control" id="txt_family_name" placeholder="Family Name">			      
+			     	</div>
+			     	<div class="input-group">
+			     		<input type="button" value="Create" id="btn_family_name" class="btn btn-success" />	
+			     	</div>				
 				</div>
-				<div class="col-sm-4">
-					<input type="text" name="txt_family_name"
-								 id="txt_family_name"/>
-				</div>
-				<div class="col-sm-4">
-					<input type="button" value="Create"
-								 id="btn_family_name" />
+				</form>				
+			</div>
+
+			<div class="row"> 
+				<div class="col-md-9" id="family_report_message">					
 				</div>
 			</div>
 
@@ -78,7 +88,6 @@
 			<div class="row" id="html_add_person_sec"> </div>
 		</div>			
 	</div>
-
 	<div class="row" id="additional" hidden>
 		<div class="col-md-9">
 			<div class="row">
@@ -162,6 +171,8 @@
 
 
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "regmain/css/stylesheet.css" %} />
+
 <script type="text/javascript" src={% static "regmain/models/base.js" %}>
 </script>
 <script type="text/javascript" src={% static "regmain/models/person.js" %}>
@@ -180,6 +191,16 @@
 </script>
 <script type="text/javascript" src={% static "regmain/models/family_model.js" %}>
 </script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 
 {% endblock %}
 

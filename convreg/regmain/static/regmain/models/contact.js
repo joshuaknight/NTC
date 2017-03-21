@@ -5,7 +5,7 @@ var HT = ''+
 		'		<label>Address</label>'+
 		'	</div>'+
 		'	<div class="col-sm-4">'+
-		'		<input type="text" name="address" id="address_id">'+
+		'		<input type="textarea" class="form-control" placeholder="Address" name="address" id="address_id">'+
 		'	</div>'+
 		'</div>'+
 		'<div class="row">'+
@@ -13,7 +13,7 @@ var HT = ''+
 		'		<label>Cell Phone</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="text" name="cell_phone" id="cell_phone_id">'+
+		' 		<input type="text" class="form-control" placeholder="CellPhone" name="cell_phone" id="cell_phone_id">'+
 		' 	</div>'+
 		' </div>'+
 		' <div class="row">'+
@@ -21,7 +21,7 @@ var HT = ''+
 		' 		<label>Telephone</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="text" name="telephone" id="telephone_id">'+
+		' 		<input type="text" class="form-control" placeholder="Telephone" name="telephone" id="telephone_id">'+
 		' 	</div>'+
 		' </div>'+
 		' <div class="row">'+
@@ -29,14 +29,9 @@ var HT = ''+
 		' 		<label>Email</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="email" name="email" id = "email_id" >'+
+		' 		<input type="email" class="form-control" placeholder="@gmail.com" name="email" id = "email_id" >'+
 		' 	</div>'+
 		' </div>'+				
-		//'<div class="row">'+
-		//'<div class="col-sm-4">'+
-		//'<button type="button" id = "call_submit" name ="submit">Add Contact</button>'+		
-		//'</div>'+
-		//'</div>'+
 		'</div>'	
 
 

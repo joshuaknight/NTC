@@ -5,7 +5,7 @@ var Ht = ''+
 		'		<label>Airport Name</label>'+
 		'	</div>'+
 		'	<div class="col-sm-4">'+
-		'		<input type="text" name="flow_type" id="flow_type" required>'+
+		'		<input type="text" class="form-control" placeholder="Airport Name" name="flow_type" id="flow_type" required>'+
 		'	</div>'+
 		'</div>'+
 		'<div class="row">'+
@@ -13,7 +13,7 @@ var Ht = ''+
 		'		<label>Airport Code</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="text" name="airport_code" id="airport_code" required>'+
+		' 		<input type="text" class="form-control" placeholder="Airport Code" name="airport_code" id="airport_code" required>'+
 		' 	</div>'+
 		' </div>'+
 		' <div class="row">'+
@@ -21,7 +21,7 @@ var Ht = ''+
 		' 		<label> Airline</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="text" name="airline" id="airline" required>'+
+		' 		<input type="text" class="form-control" placeholder="Airline" name="airline" id="airline" required>'+
 		' 	</div>'+
 		' </div>'+
 		' <div class="row">'+
@@ -29,7 +29,7 @@ var Ht = ''+
 		' 		<label> DateTime</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="date" name="datetime" id = "datetime" required>'+
+		' 		<input type="date" name="datetime" class="form-control" id = "datetime" required>'+
 		' 	</div>'+
 		' </div>'+
 		' <div class="row">'+
@@ -37,7 +37,7 @@ var Ht = ''+
 		' 		<label>Luggages</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
-		' 		<input type="number" name="luggages" id="luggages" required>'+
+		' 		<input type="number" name="luggages" class="form-control"  id="luggages" required>'+
 		' 	</div>'+
 		' </div>'+
 		//'<airport_infoput type="button" id="call_submit" value="Add Airport">'+

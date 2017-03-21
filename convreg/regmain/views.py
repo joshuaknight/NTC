@@ -183,12 +183,7 @@ def pre_eve_map(request):
             return http.JsonResponse(to_dict())
 
 
-def my_dict(lis):
-    dic={}
-    for y in lis:       
-        dic['id'] = y.id
-        dic['first_name'] = y.first_name
-        return dic
+from collections import defaultdict
 
 
 def Family_list_all_person(request,pk):    
@@ -199,6 +194,9 @@ def Family_list_all_person(request,pk):
 
         person_list = models.PersonInfo.objects.filter(family_id = family_id)
         
-                    
-    return http.JsonResponse(my_dict(person_list))
+        data_dict = defaultdict(list)
+        for y in person_list:
+            data_dict['id'].append(y.id)
+            data_dict['first_name'].append(y.first_name)                    
+    return http.JsonResponse(data_dict)
         

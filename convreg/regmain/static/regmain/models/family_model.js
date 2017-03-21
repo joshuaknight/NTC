@@ -2,11 +2,11 @@ var already_added = 0;
 
 var htfp='<div class="container">'+
 		 '<div class="row">'+
-		 ' 		<h1>Persons</h1>'+
+		 ' 		<h1 class="breadcrums">Persons</h1>'+
 		 ' </div> '+
 		 '<div class="row">'+
-		 '	<div class="col-sm-4">'+
-		 '		<input type="button" value="Add Person" id="btn_add_person_html" />'+
+		 '	<div class="input-group">'+
+		 '		<input type="button" value="Add Person" id="btn_add_person_html" class="btn btn-primary" />'+
 		 '	</div>'+
 		 '</div>'+		 
 		 '</div>'
@@ -38,6 +38,7 @@ Family.prototype.validate = function(){
 
 
 Family.prototype.submit = function(){		
+		var msg = "";
 		if ( this.validate() && 
 				already_added == 0 ){
 			console.log("Did validate");
@@ -53,12 +54,20 @@ Family.prototype.submit = function(){
 			})
 			this.container.appendChild(this.html_person);
 			already_added = 1;
-			$(sel_btn_add_person_html).on("click", add_person_html);
+			$(sel_btn_add_person_html).on("click", function(){
+					add_person_html(family_id)
+				});
+			msg = "Successfully Created"
+
 		}
 
 		else {
-			alert("Your Family Name is Empty or you already Created a Family");
-			console.log("Did not validate");
+			msg = "Your Family Name is Empty or you already Created a Family";			
 		}
+
+		var family_message_container = $("#family_report_message")[0];
+		var ele = document.createElement('p');
+		ele.innerHTML = msg;
+		family_message_container.appendChild(ele);
 }
 
