@@ -1,6 +1,6 @@
 // Person model
 var person_id = null;
-var flag_volunteer = 0;
+
 
 
 var TMPL_PERSON = '' +
@@ -30,7 +30,7 @@ var TMPL_PERSON = '' +
 		'      <label>Gender</label>' +
 		'    </div>' +
 		'    <div class="txt_sex col-sm-4">' +
-		'<input type="radio" name="sex" class="txt_sex" value="male" checked>Male'+
+		'<input type="radio" name="sex" class="txt_sex" value="male">Male'+
 		'<input type="radio" name="sex" class="txt_sex" value="female">Female'+
 		'<input type="radio" name="sex" class="txt_sex" value="transgender">Transgender'+
 		'    </div>' +
@@ -306,8 +306,8 @@ Person.prototype.bind_inputs = function() {
 		$(this.vol_type_id).on(
 				"click",
 				function() {
-						if( p.vol_type_id.value == '1' ||
-							 p.vol_type_id.value == '2'){
+						if( p.vol_type_id.value == '2' ||
+							 p.vol_type_id.value == '3'){
 								if (flag_volunteer == 0) {								
 									p.volunteer_type();
 									flag_volunteer=1;
@@ -321,7 +321,7 @@ Person.prototype.bind_inputs = function() {
 					p.all_in_one_submit();
 					p.submit();
 		});
-		$(this.add_church_btn).on("click",function(){p.church_select();});
+		//$(this.add_church_btn).on("click",function(){p.church_select();});
 		$(this.add_contact_btn).on("click", add_contact_fn);
 		$(this.special_btn).click(add_special_fn);		
 		$(this.transport_btn).click(add_transport_fn);
@@ -390,10 +390,8 @@ Person.prototype.update_fields_additional = function(){
 var person_html_to_append = '<div class = "container">'+
 							'	<div class="row">'+
 							'		<div class="col-sm-4">'+
-							'			<ul id="to_be_populated_with_family">'+
-							'			</ul>'+		
-							'			<ul id="to_be_populated_with_person">'+
-							'			</ul>'+						
+							'			<ul id="to_be_populated_with_family"> </ul>'+		
+							'			<ul id="to_be_populated_with_person"> </ul>'+						
 							'		</div>'+
 							'	</div>'+
 							'</div>'
@@ -407,7 +405,7 @@ Person.prototype.append_of_family = function(fam){
 			type : 'GET',
 		}).done(function(json){
 				for (var i = 0; i < json.length; i++) {
-					if ( family_id == json[i].id ){	
+					if ( family_id == json[i].id ){							
 						var textnode = document.createTextNode("Family " + json[i].name); 							
 						var ele = document.createElement("li");
 						ele.appendChild(textnode);						
@@ -420,11 +418,11 @@ Person.prototype.append_of_family = function(fam){
 
 Person.prototype.append_of_person = function(per){
 		$.ajax({
-			url : '/regmain/person_infos',
+			url : '/regmain/person/',
 			dataType : 'json',
 			type : 'GET',
 		}).done(function(json){
-				for (var i = 0; i < json.length; i++) {
+				for (var i = 0; i < json.length; i++) {				
 					if ( family_id == json[i].family ) {
 						var textnode = document.createTextNode("Person " + json[i].first_name);
 						var ele = document.createElement("li");
@@ -444,7 +442,7 @@ Person.prototype.append_person_to_html = function(){
 		this.to_be_populated_with_person = $(this.html_to_be_append_for_appending_person).find(
 											'#to_be_populated_with_person')[0];	
 		
-		this.append_of_family(this.to_be_populated_with_family);
+		this.append_of_family(this.to_be_populated_with_family);				
 		this.append_of_person(this.to_be_populated_with_person);
 
 		this.container_for_appending_html_to_person.appendChild(this.html_to_be_append_for_appending_person);

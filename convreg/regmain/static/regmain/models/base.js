@@ -20,6 +20,7 @@ var searched_family_list = "#searched_family_list";
 
 var sel_add_contact_btn = "#add_contact_btn";
 
+var searched_family_success_person_add = "#searched_family_success_person_add";
 
 var html_searched_family_list = $(searched_family_list)[0];
 
@@ -42,13 +43,20 @@ var html_person_add = $(person_container)[0];
 
 var html_add_person_after_submit_container = $(add_person_after_submit)[0];
 
+var html_searched_family_success_person_add = $(searched_family_success_person_add)[0];
+
+
 var family_id = -1;
 var person_list = [];
 var found_family = 0;
 
-function do_onload() {			
+
+var flag_volunteer= 0;
+
+
+function do_onload() {					
 		$(sel_btn_family_name).on("click", add_family_submit);		
-		$(btn_rock_family_name).on("click",search_family);
+		$(btn_rock_family_name).on("click",search_family);		
 }
 
 function search_family() {
@@ -60,25 +68,44 @@ function search_family() {
 			var entered_value = $(sear_txt_family)[0].value;				
 			if ( found_family == 0 ){
 				for ( i=0; i<json.length; i++) {					
-						if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){									
-								var ele = document.createElement("li");
-								var textnode = document.createTextNode(json[i].name); 							
-								ele.appendChild(textnode);
-								html_searched_family_list.appendChild(ele);
+						if ( entered_value.toLowerCase() == json[i].name.toLowerCase()){																	
 								found_family = 1;
-								return;														
+								var ele = document.createElement('button');								
+								ele.setAttribute("id", "search_family_add_person_list");
+						        //var textnode = 						        
+						        //ele.setAttribute('href', "/regmain/family_person_list/" + json[i].name);						        
+						        ele.innerHTML = "Found family " + json[i].name;
+						        //ele.appendChild(textnode);
+						        html_searched_family_list.appendChild(ele);
+								break;														
 						}		
 				}
 				if ( found_family == 0 ){
 						alert("No Family Found");
 				}
 			} 			
-		})
+			$("#search_family_add_person_list").on("click",function(){					
+					$.ajax({
+							url : '/regmain/family_person_list/'+$(sear_txt_family)[0].value,
+							type :'GET',
+							dataType :'json',						
+					}).done(function(json){																									
+						var size = Object.keys(json).length												
+						for (var i = 0; i < size ; i++){																					
+								var ele = document.createElement('button');
+								ele.innerHTML = "Person"+"-"+json['first_name'];
+								html_searched_family_success_person_add.appendChild(ele);
+						}
+					});
+			});
+		});
 }
 
-function add_person_html() {				
+function add_person_html() {			
+		flag_volunteer = 0;
 		person = new Person(family_id);
 		person.render(html_add_person_sec);
+		person.church_select();
 }
 
 
@@ -86,6 +113,7 @@ function add_family_submit(event) {
 		fam = new Family();
 		fam.render(html_person_add);
 }
+
 
 
 do_onload();

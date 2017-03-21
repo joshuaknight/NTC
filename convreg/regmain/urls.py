@@ -9,6 +9,9 @@ from regmain import views
 router = routers.DefaultRouter()
 
 router.register(
+    'person',viewsets.PersonViewSet)
+
+router.register(
     'families', viewsets.FamilyViewSet)
 router.register(
     'churches', viewsets.ChurchViewSet)
@@ -80,4 +83,7 @@ urlpatterns = [
         r'^pre_eve_map/$', views.pre_eve_map,
         name='pre_eve_map'),
 
+      urls.url(
+        r'^family_person_list/(?P<pk>\w+)/$',views.Family_list_all_person,
+        name="family_person_list"),
 ]

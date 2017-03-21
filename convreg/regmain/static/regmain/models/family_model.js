@@ -36,8 +36,10 @@ Family.prototype.validate = function(){
 		}
 }
 
-Family.prototype.submit = function(){
-		if ( this.validate() && already_added == 0){
+
+Family.prototype.submit = function(){		
+		if ( this.validate() && 
+				already_added == 0 ){
 			console.log("Did validate");
 			$.ajax({
 				url: "/regmain/add_family/",
@@ -53,6 +55,7 @@ Family.prototype.submit = function(){
 			already_added = 1;
 			$(sel_btn_add_person_html).on("click", add_person_html);
 		}
+
 		else {
 			alert("Your Family Name is Empty or you already Created a Family");
 			console.log("Did not validate");

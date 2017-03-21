@@ -2,6 +2,8 @@
 
 {% block title %}Registration Form{% endblock %}
 
+
+
 {% block main_content %}
 <div class="convreg-header" id="content" tabindex="-1">
 	<div class="container">
@@ -31,10 +33,21 @@
 					<input type="button" name="btn_rock_family_name"
 								 value="Search" id="btn_rock_family_name" />
 				</div>
+
 			</div>
-			<div class="row" id="searched_family">
+
+			<div class="row">
+				<div class="col-sm-4">							
 				<ul id="searched_family_list"></ul>				
+				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-sm-4">							
+				<ul id="searched_family_success_person_add"></ul>				
+				</div>
+			</div>
+
 			<div class="row">
 				<h3>New Family Info</h3>
 				<div class="col-sm-4">

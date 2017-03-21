@@ -8,6 +8,7 @@ import dateparser
 import constants
 from regmain import models
 
+import json
 
 
 def single_form(request):
@@ -180,3 +181,24 @@ def pre_eve_map(request):
             #    arrival = arrival,departure = departure)
            # x.save()
             return http.JsonResponse(to_dict())
+
+
+def my_dict(lis):
+    dic={}
+    for y in lis:       
+        dic['id'] = y.id
+        dic['first_name'] = y.first_name
+        return dic
+
+
+def Family_list_all_person(request,pk):    
+    if request.method == 'GET':        
+    
+        get_name = models.Family.objects.get(name = pk)
+        family_id = get_name.to_dict()['id']
+
+        person_list = models.PersonInfo.objects.filter(family_id = family_id)
+        
+                    
+    return http.JsonResponse(my_dict(person_list))
+        

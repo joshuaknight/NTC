@@ -4,7 +4,7 @@ from regmain import constants
 
 
 class Family(models.Model):
-    name = models.CharField(max_length=1024)
+    name = models.CharField(max_length=1024,unique=True)
 
     class Meta:
         app_label = constants.APP_LABEL

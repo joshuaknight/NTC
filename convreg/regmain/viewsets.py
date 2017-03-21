@@ -42,7 +42,7 @@ class SpecialRequestViewSet(viewsets.ModelViewSet):
 class PersonInfoViewSet(viewsets.ModelViewSet):
     queryset = models.PersonInfo.objects.all()
     serializer_class = serializers.PersonInfoSerializer
-
+    
 
 class VolunteerTypeViewSet(viewsets.ModelViewSet):
     queryset = models.VolunteerType.objects.all()
@@ -72,3 +72,8 @@ class PersonEventMapViewSet(viewsets.ModelViewSet):
 class RegFormPersonMapViewSet(viewsets.ModelViewSet):
     queryset = models.RegFormPersonMap.objects.all()
     serializer_class = serializers.RegFormPersonMapSerializer
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = models.PersonInfo.objects.all()
+    serializer_class = serializers.PersonSerializer

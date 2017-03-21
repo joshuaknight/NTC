@@ -109,3 +109,11 @@ class RegFormPersonMapSerializer(
         model = models.RegFormPersonMap
         fields = (
             'reg_form', 'person_event')
+
+class PersonSerializer(
+        serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PersonInfo
+        fields = '__all__'
+            
