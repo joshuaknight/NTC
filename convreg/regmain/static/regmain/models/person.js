@@ -4,8 +4,8 @@ var person_id = null;
 
 
 var TMPL_PERSON = '' +
-		'<div class="container">' +
-		'  <div class="row">' +
+		'<div class="container" id="the_person_container">' +
+		'  <div class="row" id="my_form_person">' +
 		'    <div class="col-sm-4">' +
 		'      <label>First Name</label>' +
 		'    </div>' +
@@ -13,9 +13,10 @@ var TMPL_PERSON = '' +
 		'      <input type="text" placeholder="First name" name="txt_first_name" ' +
 		'             id="txt_first_name" class="form-control" />' +
 		'    </div>' +
+		'	  <div id="error_message_first_name"> </div>'+
 		'  </div>' +
 
-		'  <div class="row">' +
+		'  <div class="row" id="my_form_person">' +
 		'    <div class="col-sm-4">' +
 		'      <label>Last Name</label>' +
 		'    </div>' +
@@ -23,20 +24,22 @@ var TMPL_PERSON = '' +
 		'      <input type="text" name="txt_last_name" ' +
 		'             id="txt_last_name" class="form-control" placeholder="Last name" />' +
 		'    </div>' +
+		'	  <div id="error_message_last_name"> </div>'+
 		'  </div>' +
 
-		'  <div class="row">' +
+		'  <div class="row" id="my_form_person">' +
 		'    <div class="col-sm-4">' +
 		'      <label>Gender</label>' +
 		'    </div>' +
 		'    <div id="txt_sex" class="radio">' +		
-		'	<label> <input 	type="radio" name="sex" id="txt_sex" value="male">Male </label>'+
-		'	<label> <input type="radio" name="sex" id="txt_sex" value="female">Female</label>'+
-		'	<label> <input type="radio" name="sex" id="txt_sex" value="transgender">Transgender</label>'+		
-		'    </div>' +
+		'	<label> <input 	type="radio" name="sex" id="1" value="male">Male </label>'+
+		'	<label> <input  type="radio" name="sex" id="2" value="female">Female</label>'+
+		'	<label> <input  type="radio" name="sex" id="3" value="transgender">Transgender</label>'+		
+		'	  <div id="error_message_sex"> </div>'+
+		'    </div>' +		
 		'  </div>' +
 
-		'  <div class="row">' +
+		'  <div class="row" id="my_form_person">' +
 		'    <div class="col-sm-4">' +
 		'      <label>Date of Birth</label>' +
 		'    </div>' +
@@ -44,30 +47,10 @@ var TMPL_PERSON = '' +
 		'      <input type="date"  class="form-control" name="txt_dob" ' +
 		'             id="txt_dob" />' +
 		'    </div>' +
-		'  </div>' +
-
-		'  <div class="row">' +
-		'		<div class="col-sm-4">' +
-		'      	<label>Airport Info</label>'+
-		'    	</div>' +
-		'		<div class="col-sm-4">' +
-		'		<input type="button" class="btn btn-primary" value="Add Airport Info" id="add_airport_btn"/>' +
-		'    	</div>' +
-		'  </div>' +
-
-		' <div class="row" id="html_add_airport"></div>'+
-
-		'  <div class="row">' +
-		'		<div class="col-sm-4">' +
-		'      	<label>Contact Info</label>'+
-		'    	</div>' +
-		'		<div class="col-sm-4">' +
-		'		<input type="button"  class="btn btn-primary" id="add_contact_btn" value="Add Contact Info">'+
-		'    	</div>' +
+		'	  <div id="error_message_dob"> </div>'+
 		'  </div>' +		
-		' <div class="row" id="html_contact_info"></div>'+
-		
-		' <div class="row">'+
+
+		' <div class="row" id="my_form_person">'+
 		'    <div class="col-sm-4">' +
 		'      <label>Church Info</label>' +
 		'    </div>' +
@@ -77,7 +60,7 @@ var TMPL_PERSON = '' +
 		'    </div>'  +
 		' </div>'+
 
-		'  <div class="row">' +
+		'  <div class="row" id="my_form_person">' +
 		'		<div class="col-sm-4">' +
 		'      	<label>Attendance Type</label>'+
 		'    	</div>' +
@@ -91,11 +74,11 @@ var TMPL_PERSON = '' +
 		'		<div class="col-sm-4" id="html_att_type"> </div>'+
 		'  </div>' +
 
-		'  <div class="row">' +
-		'    <div class="col-sm-4">' +
-		'      <input type="button" value="Submit" class="btn btn-success" id="btn_person_submit"/>' +
-		'    </div>' +
-		'  </div>' +
+	//	'  <div class="row">' +
+	//	'    <div class="col-sm-4">' +
+		//'      <input type="button" value="Submit Person" class="btn btn-success" id="btn_person_submit"/>' +
+	//	'    </div>' +
+	//	'  </div>' +
 		'</div>'
 
 
@@ -114,11 +97,6 @@ var Person = function(family_id) {
 		this.container = null;
 		this.html_node = $(TMPL_PERSON)[0];
 
-		this.html_contact_info = null;
-		this.add_contact_btn = null;
-
-		this.html_add_airport = null;
-		this.add_airport_btn = null;
 
 		this.txt_first_name = null;
 		this.txt_last_name = null;
@@ -147,13 +125,12 @@ var Person = function(family_id) {
 		this.arrival_date = null;
 		this.depature_date = null;
 		
-		this.airport_info_id = null;
+
 		this.church_id = null;
 		this.family_id = family_id;
 		this.contact_info_id = null;
 		this.att_type_id = null;
 
-		this.airport = null;
 		this.contact = null;
 		this.att_type = null;
 		this.church = null;
@@ -166,21 +143,6 @@ var Person = function(family_id) {
 		this.to_be_populated_with_person = null;
 }
 
-
-Person.prototype.all_in_one_submit = function(){		
-		if ( this.airport != null && this.contact != null 
-			 && this.att_type != null ){
-			this.airport.submit();			
-			this.contact.submit();											
-			this.contact_info_id = this.contact.id;
-			this.airport_info_id = this.airport.id;			
-		//	this.att_type.submit();
-			this.church_id = this.church.return_id();			
-		}				
-		else {
-			return false;	
-		}
-}
 
 Person.prototype.render = function(container) {
 		this.container = container;				
@@ -217,11 +179,18 @@ Person.prototype.update_html_fields = function() {
 		this.txt_dob = this.dob;
 }
 
-Person.prototype.submit = function() {				
+Person.prototype.submit = function() {	
+		this.contact_info_id = contact_id;
+		console.log(this.contact_info_id);
+		console.log(contact_id);
+		this.church_id = this.church.return_id();
+
 		if (this.container === null) {
 				return false;
-		}		
+		}
+
 		this.update_values_from_form();
+		
 		p = this;
 
 		$.ajax({
@@ -241,7 +210,9 @@ Person.prototype.submit = function() {
 		}).done(function(json) {
 				p.process_response(json);
 		});		
-		p.append_person_to_html();
+
+		
+		//p.append_person_to_html();
 }
 
 Person.prototype.bind_inputs = function() {
@@ -258,15 +229,6 @@ Person.prototype.bind_inputs = function() {
 		this.txt_dob = $(this.html_node).find(
 				'#txt_dob')[0];		
 
-		this.html_add_airport = $(this.html_node).find(
-				'#html_add_airport')[0];
-		this.add_airport_btn = $(this.html_node).find(
-				'#add_airport_btn')[0];
-
-		this.html_contact_info = $(this.html_node).find(
-				'#html_contact_info')[0];
-		this.add_contact_btn = $(this.html_node).find(
-				'#add_contact_btn')[0];
 
 		this.btn_submit = $(this.html_node).find(
 				'#btn_person_submit')[0];
@@ -299,46 +261,23 @@ Person.prototype.bind_inputs = function() {
 		
 		var add_special_fn = function(){p.special_request();}
 		var add_transport_fn = function(){p.transport();}
-		var add_airport_fn = function() { p.add_airport_html(); }
-		var add_contact_fn = function() { p.add_contact_html(); }
 		
-		$(this.add_airport_btn).on("click", add_airport_fn);
-		$(this.vol_type_id).on(
-				"click",
-				function() {
-						if( p.vol_type_id.value == '2' ||
-							 p.vol_type_id.value == '3'){
-								if (flag_volunteer == 0) {								
-									p.volunteer_type();
-									flag_volunteer=1;
-							}
-						}
-						//if(p.vol_type_id.value == 'Normal'){
-						//		pass
-						//}
-				});
-		$(this.btn_submit).on("click",function(){					
-					p.all_in_one_submit();
-					p.submit();
-		});
-		//$(this.add_church_btn).on("click",function(){p.church_select();});
-		$(this.add_contact_btn).on("click", add_contact_fn);
-		$(this.special_btn).click(add_special_fn);		
-		$(this.transport_btn).click(add_transport_fn);
+		
+		
+		//$(this.btn_submit).on("click",function(){					
+		//			p.all_in_one_submit();
+		//			p.submit();
+		//});
+		//$(this.add_church_btn).on("click",function(){p.church_select();});		
+		//$(this.special_btn).click(add_special_fn);		
+		//$(this.transport_btn).click(add_transport_fn);
 
-		$(this.additional_submit).click(function(){p.additional_sub();});
-}
-	
+		//$(this.additional_submit).click(function(){p.additional_sub();});
+		
+		p.call_me_after_person_input();
 
-Person.prototype.add_airport_html = function(){
-		this.airport = new Airport();
-		this.airport.render(this.html_add_airport);
 }
 
-Person.prototype.add_contact_html = function(){
-		this.contact = new Contact();
-		this.contact.render(this.html_contact_info); 	
-}
 
 Person.prototype.volunteer_type = function(){	
 		this.att_type = new Attendance();
@@ -351,37 +290,6 @@ Person.prototype.church_select = function(){
 }	
 
 
-Person.prototype.special_request = function(){	
-		pre_eve_map = new Mapping_person();
-		pre_eve_map.render(this.html_add_special);
-}
-
-Person.prototype.transport = function(){
-		trans = new Transport();
-		trans.render(this.html_transport);
-}
-
-Person.prototype.additional_sub = function(){
-		this.update_fields_additional();
-		$.ajax({
-				url: "/regmain/pre_eve_map/",
-				data: {
-						primary_contact: this.primary_contact,
-						arrival_date : this.arrival_date,
-						depature_date : this.depature_date,
-						transport : this.transport.id,						
-				},
-				type: "POST",
-				dataType: "json",
-		});;	
-} 
-
-
-Person.prototype.update_fields_additional = function(){
-		this.primary_contact = $("#primary_contact").value;
-		this.arrival_date = $("arrival_date").value;
-		this.depature_date = $('depature_date').value;
-}
 
 
 
@@ -447,3 +355,183 @@ Person.prototype.append_person_to_html = function(){
 
 		this.container_for_appending_html_to_person.appendChild(this.html_to_be_append_for_appending_person);
 }
+
+
+
+
+Person.prototype.call_me_after_person_input = function(){
+		var p = this;
+		
+		$("#txt_first_name").change(function(){	
+				var ele = $(p.html_node).find("#error_message_first_name")[0];
+				if ( $("#txt_first_name")[0].value.length < 3 || 
+						!/^[a-zA-Z ]+$/.test($("#txt_first_name")[0].value) ){											
+					ele.style.color = "red";				
+					ele.innerHTML = p.txt_first_name.value + " is not a valid name";					
+					
+				}				
+				else {
+					ele.innerHTML="";
+					
+				}							
+		});
+		
+		$("#txt_last_name").change(function(){	
+				var ele = $(p.html_node).find("#error_message_last_name")[0];
+				if ( $("#txt_last_name")[0].value.length < 3 || 
+						!/^[a-zA-Z ]+$/.test($("#txt_last_name")[0].value) ){											
+					ele.style.color = "red";				
+					ele.innerHTML = p.txt_last_name.value + " is not a valid name";
+					
+				}				
+				else {
+					ele.innerHTML="";
+					
+				}							
+		});
+		
+		$("#txt_dob").change(function(){		
+				var ele_sex = $("#error_message_sex")[0];
+				if ( !$("#1")[0].checked  && !$("#2")[0].checked && !$("#3")[0].checked ){									
+						ele_sex.style.color = "red";
+						ele_sex.innerHTML = "Select a Gender";									
+				}
+				
+				$("#txt_sex").change(function(){
+					ele_sex.innerHTML = "";										
+				})		
+								
+
+				var ele = $(p.html_node).find("#error_message_dob")[0];
+				ele.style.color = "red";						
+				var x = new Date($("#txt_dob")[0].value);
+				var year = x.getFullYear();
+				if ( year >= 2016 || year < 1930 ){						
+					ele.innerHTML = p.txt_dob.value + " is not a valid DOB";
+					
+				}
+				else{
+					ele.innerHTML="";
+					
+				}
+
+		});		
+				
+
+		$("#vol_type_id").change(function(){				
+				if ( $("#vol_type_id")[0].value == '2' ||
+						$("#vol_type_id")[0].value == '3') {						
+						$("#html_att_type")[0].style.visibility = "visible";
+						if ( flag_volunteer == 0 ){
+							p.volunteer_type();							
+							flag_volunteer=1;
+							return;
+					}
+				} 	
+				else if ( $("#vol_type_id")[0].value == '1' ){
+						$("#html_att_type")[0].style.visibility = "hidden";						
+				}
+						
+
+		
+			if (												
+				  	$("#txt_dob")[0].value != "" && 
+					$("#txt_first_name")[0].value != "" && 
+					$("#txt_last_name")[0].value != ""  &&
+					( $("#1")[0].value != "" || $("#2")[0].value  != ""  || $("#3")[0].value != ""  ) &&
+					$("#vol_type_id")[0].value != "" &&
+					$("#add_church_btn")[0].value != ""  )				
+			{ 
+					$("#finish_submit_btn_div")[0].style.visibility = "visible";
+			}
+
+		});
+
+}
+
+
+
+
+
+
+// if all is valid enable the continue button 
+
+// after the continue button is clicked finish_submit_btn 
+
+// function call if_all_are_valid();
+
+// empty the main_container_all $("#main_container_all").html('');
+
+// append new container with following message 
+
+/*
+	Welcome FamilyName, We are happy to see that you have registered to attend the 
+	event held on this particular date please continue your registration by filling 
+	the below details Thank you Have a Wonderfull Day !
+*/
+
+// append new form with arrival and departure date event selection etc 
+
+// Once the form is filled Finish Registration Button send the confirmation mail with the following message 
+
+/*
+
+	We are pleased to inform you that the registration was  successfull, a person from our side will
+	contact you, and also if you have any queries you can contact us via email or by using the contact form
+	in our website, You can also edit your profile anytime  by loggin in with the userid and password provided 
+	below Once again have a wonderfull day
+
+	#CaseSensitive
+	Userid   : familynameprimarypersonname,
+	password : familynameprimarypersonname,
+
+	Thank You
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Person.prototype.special_request = function(){	
+		pre_eve_map = new Mapping_person();
+		pre_eve_map.render(this.html_add_special);
+}
+
+Person.prototype.transport = function(){
+		trans = new Transport();
+		trans.render(this.html_transport);
+}
+
+Person.prototype.additional_sub = function(){
+		this.update_fields_additional();
+		$.ajax({
+				url: "/regmain/pre_eve_map/",
+				data: {
+						primary_contact: this.primary_contact,
+						arrival_date : this.arrival_date,
+						depature_date : this.depature_date,
+						transport : this.transport.id,						
+				},
+				type: "POST",
+				dataType: "json",
+		});;	
+} 
+
+
+Person.prototype.update_fields_additional = function(){
+		this.primary_contact = $("#primary_contact").value;
+		this.arrival_date = $("arrival_date").value;
+		this.depature_date = $('depature_date').value;
+}
+*/
+
+

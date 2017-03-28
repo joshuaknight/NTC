@@ -1,37 +1,42 @@
 var HT = ''+
-		'<div class="container">'+
-		'<div class="row">'+
+		'<div class="container" id="the_contact_container">'+
+		'<div class="row" id="my_form_contact">'+
 		'	<div class="col-sm-4">'+
 		'		<label>Address</label>'+
 		'	</div>'+
 		'	<div class="col-sm-4">'+
-		'		<input type="textarea" class="form-control" placeholder="Address" name="address" id="address_id">'+
+		'		<textarea type="textarea" cols="5" rows="5" class="form-control" placeholder="Address" name="address" id="address_id"  > </textarea>'+		
 		'	</div>'+
+		'	<div id="errormsg_for_address"> </div>'+
 		'</div>'+
-		'<div class="row">'+
+		'<div class="row" id="my_form_contact">'+
 		'	<div class = "col-sm-4">'+
 		'		<label>Cell Phone</label>'+
 		' 	</div>'+
-		' 	<div class = "col-sm-4">'+
+		' 	<div class = "col-sm-4">'+		
 		' 		<input type="text" class="form-control" placeholder="CellPhone" name="cell_phone" id="cell_phone_id">'+
 		' 	</div>'+
+		'	<div id="errormsg_for_cellphone"> </div>'+
 		' </div>'+
-		' <div class="row">'+
+		' <div class="row" id="my_form_contact">'+
 		' 	<div class = "col-sm-4">'+
 		' 		<label>Telephone</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
 		' 		<input type="text" class="form-control" placeholder="Telephone" name="telephone" id="telephone_id">'+
 		' 	</div>'+
+		'	<div id="errormsg_for_telephone"> </div>'+
 		' </div>'+
-		' <div class="row">'+
+		' <div class="row" id="my_form_contact">'+
 		' 	<div class = "col-sm-4">'+
 		' 		<label>Email</label>'+
 		' 	</div>'+
 		' 	<div class = "col-sm-4">'+
 		' 		<input type="email" class="form-control" placeholder="@gmail.com" name="email" id = "email_id" >'+
 		' 	</div>'+
-		' </div>'+				
+		'	<div id="errormsg_for_email"> </div>'+
+		' </div>'+
+		//'<input type="button" id="call_submit"  class="btn btn-success" value="Submit Contact">'+				
 		'</div>'	
 
 
@@ -72,13 +77,85 @@ Contact.prototype.bind_all = function(){
 		this.email_id = $(this.html_node).find("#email_id")[0];
 		this.telephone_id = $(this.html_node).find("#telephone_id")[0];
 		
-		//this.btn_ = $("#call_submit");
+		this.btn_ = $("#call_submit")[0];
 		
-		//p = this;	
+		p = this;	
 		
-		//$(this.btn_).click(function(){p.submit();});
+		$(this.btn_).click(function(){p.submit();});
 		
-		return true;
+		this.validate();
+}
+
+Contact.prototype.validate = function(){
+
+		$("#address_id").change(function(){				
+				var length = $("#address_id")[0].value.match(/\S+/g).length;
+				var ele = $("#errormsg_for_address")[0];
+				if ( length <= 10 ) {					
+					ele.style.color = "red";
+					ele.innerHTML = "Address Not Valid";					
+					
+				}
+				else {
+					ele.innerHTML = "";										
+				}
+		});
+
+		$("#cell_phone_id").change(function(){	
+				var length = $("#cell_phone_id")[0].value.length;
+				var ele = $("#errormsg_for_cellphone")[0];
+				if ( length < 10 || 
+						length > 11  || 
+							!/^[0-9]+$/.test($("#cell_phone_id")[0].value) ) {
+						ele.style.color="red";
+						ele.innerHTML = "Cell Number Not Valid";
+				}
+				else if ( length == 10 ){
+						ele.innerHTML = "";
+				}
+		});	
+
+
+
+		$("#telephone_id").change(function(){
+				var length = $("#telephone_id")[0].value.length;
+				var ele = $("#errormsg_for_telephone")[0];
+				if ( length < 7 || 
+						length > 8  || 
+							!/^[0-9]+$/.test($("#cell_phone_id")[0].value) ) {
+						ele.style.color="red";
+						ele.innerHTML = "Telephone Not Valid";
+				}
+				else if ( length == 7 ){
+						ele.innerHTML = "";
+				}
+		});
+		
+
+
+		$("#email_id").change(function(){			
+				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;    		    
+				var email = $("#email_id")[0].value;				
+				var ele = $("#errormsg_for_email")[0];
+				if ( re.test(email) ){
+
+					ele.innerHTML = "";
+				}
+				else {
+					ele.style.color="red";
+					ele.innerHTML = email + " is not a valid e-mail address";
+				} 			    			   
+		
+				if ( $("#address_id")[0].value != "" && 
+					$("#cell_phone_id")[0].value != "" && 
+					$("#email_id")[0].value != "" && 
+					$("#telephone_id")[0].value != "" && 
+					$("#luggages")[0].value != ""  )
+				{
+					$("#btn_add_person_html")[0].style.visibility="visible";
+					$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
+				}
+		});
 }
 
 
@@ -92,7 +169,8 @@ Contact.prototype.update_html_fields = function(){
 
 
 Contact.prototype.process_response_contact = function(json){
-		this.id = json.id;
+		this.id = json.id;		
+		contact_id = this.id;
 		this.address = json.address;
 		this.cell = json.cell_phone;
 		this.email = json.email;

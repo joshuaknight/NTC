@@ -1,8 +1,8 @@
 var HTT = ''+
-		'<div class="row">' +
+		'<div class="row" id="vol_list">' +
 		'  <div class="row">' +
-		'    <div class="col-sm-4">' +
-		'		<select id="vol_type_id" class="form-control">'+
+		'    <div class="col-sm-9">' +
+		'		<select id="vol_type_id_list" class="form-control">'+
 		'		</select>'+
 		'    </div>' +
 		'  </div>'+
@@ -26,7 +26,7 @@ var Attendance = function(){
 
 Attendance.prototype.render = function(container){
 		this.container = container;				
-		this.vol_type_id = $(this.html_node).find("#vol_type_id")[0];						
+		this.vol_type_id = $(this.html_node).find("#vol_type_id_list")[0];						
 		var select = this.vol_type_id;
 		$.ajax({
 				url : '/regmain/volunteer_types/?format=json',
