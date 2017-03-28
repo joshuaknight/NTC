@@ -64,9 +64,13 @@
 						<input type="button" value="Create" id="btn_family_name" class="btn btn-success" />				     	
 					</div>				
 				</div>					
-				<div class="row" id="family_report_message"> </div>				
+				<div class="row" id="family_report_message"> </div>		
+				<div class="row" id="finish_submit_btn_div" >
+					<input type="button" id="finish_submit_btn" name="finish_submit_btn" class="btn btn-success" 
+							value="Continue and Finish" />
+				</div>		
 
-				<div class="row" id="html_add_person_parent">			
+				<div class="row" id="html_add_person_parent">									
 						<div class="row" id="add_person_after_submit"></div>		
 						<div class="row" id="add_person_html_impt"> </div>
 						<div class="row" id="html_add_person_sec"> </div>		
@@ -76,9 +80,7 @@
 		</div>
 	</div>
 
-	<div class="row" id="finish_submit_btn_div" >
-		<input type="button" id="finish_submit_btn" name="finish_submit_btn" class="btn btn-success" value="Continue" />
-	</div>
+	
 </div>		
 
 
@@ -94,7 +96,7 @@
 					<label>Person</label>
 				</div>
 				<div class="col-sm-4">
-					<input type="text" value="ID-Person Name" name="person" disabled>
+					<input type="text" class="form-control" value="ID-Person Name" name="person" disabled>
 				</div>					
 			</div>
 			<div class="row">
@@ -102,14 +104,14 @@
 					<label>Event</label>
 				</div>
 				<div class="col-sm-4">
-					<input type="text" value="Event Name" name="event" disabled>
+					<input type="text"  class="form-control" value="Event Name" name="event" disabled>
 				</div>									
 			</div>
 
 			<div class="row">
 				<div class="col-sm-4">
 					<label>Primary Contact</label>
-					Yes <input type="checkbox" value="primary_contact" checked>
+					Yes <input type="checkbox"  value="primary_contact" checked>
 					No <input type="checkbox" value="primary_contact" id="primary_contact">
 				</div>							
 			</div>
@@ -119,7 +121,7 @@
 					<label>Arrival</label>
 				</div>
 				<div class="col-sm-4">
-					<input type="date"  name="arrival_date" id = "arrival_date">
+					<input type="date"  class="form-control" name="arrival_date" id = "arrival_date">
 				</div>									
 			</div>
 
@@ -128,7 +130,7 @@
 					<label>Depature</label>
 				</div>
 				<div class="col-sm-4">
-					<input type="date"  name="depature_date" id = "depature_date">
+					<input type="date"  name="depature_date"  class="form-control id = "depature_date">
 				</div>									
 			</div>
 
@@ -137,7 +139,7 @@
 					<label>Do You have a Special Request ?</label>
 				</div>
 				<div class="col-sm-4">
-					<input type="button" value="Add Speical Request" id="special_btn">
+					<input type="button" value="Add Speical Request" class="btn btn-primary" id="special_btn">
 				</div>						
 			</div>
 			<div class="row" id="html_add_special"></div>

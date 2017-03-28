@@ -1,6 +1,6 @@
 
 var already_added = 0;
-var contact_id = 0;
+
 var airport_id = 0;
 
 
@@ -121,8 +121,10 @@ Family.prototype.submit = function(){
 		
 		$("#finish_submit_btn").on("click",function(){				
 				p.all_in_one_submit();
-				$("#main_container_all").html('');
-				$("#additional")[0].style.visibility = 'visible';
+				pers = new PersonPrimary();
+				pers.render();
+			//	$("#main_container_all").html('');
+			//	$("#additional")[0].style.visibility = 'visible';
 		});
 }
 
@@ -142,8 +144,7 @@ Family.prototype.all_in_one_submit = function(){
 		}
 
 		this.airport.submit();				
-		this.contact.submit();
-		contact_id = this.contact.id;
+		this.contact.submit();				
 		airport_id = this.airport.id;
 		this.person.submit();
 }
@@ -171,4 +172,38 @@ Family.prototype.add_person_html = function(family_id) {
 		this.person.render(html_add_person_sec);
 		this.person.church_select();			
 		$("html, body").animate({ scrollTop: $("#html_add_person_sec")[0].scrollHeight}, 1000);
+}
+
+
+
+
+
+
+
+var primary_person = ''
+					
+
+
+
+
+
+var PersonPrimary = function(){
+		this.id = null;
+
+		this.html_node = $(primary_person);
+
+		this.container = null;
+}
+
+
+PersonPrimary.prototype.render = function(container){
+		this.container = container;
+		$(this.container).append(this.html_node);
+		this.bind_input();
+}
+
+
+PersonPrimary.prototype.bind_input = function(){
+
+		
 }

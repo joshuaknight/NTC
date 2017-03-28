@@ -361,6 +361,11 @@ Person.prototype.append_person_to_html = function(){
 
 Person.prototype.call_me_after_person_input = function(){
 		var p = this;
+		var my_flag = 0;
+		var have_error_first_name=true;
+		var have_error_last_name=true;
+		var have_error_dob_name=true;
+		var have_error_sex = true;
 		
 		$("#txt_first_name").change(function(){	
 				var ele = $(p.html_node).find("#error_message_first_name")[0];
@@ -368,11 +373,11 @@ Person.prototype.call_me_after_person_input = function(){
 						!/^[a-zA-Z ]+$/.test($("#txt_first_name")[0].value) ){											
 					ele.style.color = "red";				
 					ele.innerHTML = p.txt_first_name.value + " is not a valid name";					
-					
+					have_error_first_name = false;
 				}				
 				else {
-					ele.innerHTML="";
-					
+					ele.innerHTML="";	
+					have_error_first_name=true;				
 				}							
 		});
 		
@@ -382,11 +387,11 @@ Person.prototype.call_me_after_person_input = function(){
 						!/^[a-zA-Z ]+$/.test($("#txt_last_name")[0].value) ){											
 					ele.style.color = "red";				
 					ele.innerHTML = p.txt_last_name.value + " is not a valid name";
-					
+					have_error_last_name = false;
 				}				
 				else {
 					ele.innerHTML="";
-					
+					have_error_last_name = true;
 				}							
 		});
 		
@@ -395,10 +400,12 @@ Person.prototype.call_me_after_person_input = function(){
 				if ( !$("#1")[0].checked  && !$("#2")[0].checked && !$("#3")[0].checked ){									
 						ele_sex.style.color = "red";
 						ele_sex.innerHTML = "Select a Gender";									
+						have_error_sex = false;
 				}
 				
 				$("#txt_sex").change(function(){
-					ele_sex.innerHTML = "";										
+					ele_sex.innerHTML = "";		
+					have_error_sex = true;								
 				})		
 								
 
@@ -408,11 +415,11 @@ Person.prototype.call_me_after_person_input = function(){
 				var year = x.getFullYear();
 				if ( year >= 2016 || year < 1930 ){						
 					ele.innerHTML = p.txt_dob.value + " is not a valid DOB";
-					
+					have_error_dob_name = false;
 				}
 				else{
 					ele.innerHTML="";
-					
+					have_error_dob_name = true;
 				}
 
 		});		
@@ -434,19 +441,69 @@ Person.prototype.call_me_after_person_input = function(){
 						
 
 		
-			if (												
+			if ( my_flag == 0 &&  
+				 check_for_validity() && 											
 				  	$("#txt_dob")[0].value != "" && 
 					$("#txt_first_name")[0].value != "" && 
 					$("#txt_last_name")[0].value != ""  &&
 					( $("#1")[0].value != "" || $("#2")[0].value  != ""  || $("#3")[0].value != ""  ) &&
 					$("#vol_type_id")[0].value != "" &&
 					$("#add_church_btn")[0].value != ""  )				
-			{ 
-					$("#finish_submit_btn_div")[0].style.visibility = "visible";
-			}
+				{ 
+
+					my_append();
+				}
+
+			else {
+					if ( !have_error_first_name ){
+						$("#txt_first_name").change(function(){
+							if ( check_for_validity() ) {								
+								my_append();
+							}
+						});
+					}
+
+					if ( !have_error_last_name ){
+						$("#txt_last_name").change(function(){
+							if ( check_for_validity() ) {								
+								my_append();
+							}
+						});
+					}
+
+					if ( !have_error_dob_name ){
+						$("#txt_dob").change(function(){
+							if ( check_for_validity() ) {								
+								my_append();
+							}
+						});
+					}
+
+					if ( !have_error_sex ){
+						$("#txt_sex").change(function(){
+							if ( check_for_validity() ) {								
+								my_append();
+							}
+						});
+					}
+			}				
 
 		});
+			var check_for_validity = function(){
+					if ( have_error_first_name &&
+							have_error_last_name &&
+								have_error_dob_name &&
+										have_error_sex ) {
+						return true;
+					}
+					else return false;
+			}
 
+			var my_append = function(){
+					$("#finish_submit_btn_div")[0].style.visibility = "visible";
+					my_flag = 1;
+					$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
+			}
 }
 
 

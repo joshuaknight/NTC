@@ -1,4 +1,11 @@
 
+#finish_submit_btn{
+		padding-left:50px;
+		padding-right:50px;
+		font-size:25px;
+		margin-left:20px;
+}
+
 .navbar{		
 		padding-left:30px;
 		padding-right:10px;		
@@ -44,7 +51,7 @@
 		margin-top:10px;
 }
 
-#btn_add_person_html,#add_btn_contact{
+#btn_add_person_html,#add_btn_airport{
 		visibility: hidden;
 }
 

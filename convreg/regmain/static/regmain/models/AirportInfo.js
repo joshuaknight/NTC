@@ -95,6 +95,12 @@ Airport.prototype.bind_all = function(){
 
 
 Airport.prototype.validate_inputs = function(){
+		
+		var flow_type_bool = true;
+		var airport_code_bool = true;
+		var airline_bool = true;
+		var datetime_bool = true;		
+
 
 		$("#flow_type").change(function(){
 				var ele = $("#error_message_flow_type")[0];
@@ -103,8 +109,10 @@ Airport.prototype.validate_inputs = function(){
 
 						ele.style.color="red";								
 						ele.innerHTML = flow_type.value + " is not a valid Airport name";						
+						flow_type_bool = false;
 				}					
 				else{
+						flow_type_bool = true;
 						ele.innerHTML = "";
 				}
 		});
@@ -116,8 +124,10 @@ Airport.prototype.validate_inputs = function(){
 						!/^[0-9]+$/.test($("#airport_code")[0].value ) ){					
 						ele.style.color="red";								
 						ele.innerHTML = airport_code.value + " is not a valid Airport Code";						
+						airport_code_bool = false;
 				}					
 				else{
+						airport_code_bool = true;
 						ele.innerHTML = "";
 				}
 		});
@@ -126,10 +136,12 @@ Airport.prototype.validate_inputs = function(){
 				var ele = $("#error_message_airline_id")[0];
 				if ( /^[0-9]+$/.test($("#airline")[0].value) ){					
 						ele.innerHTML = "";						
+						airline_bool = true;
 				}					
 				else{
 					ele.style.color="red";								
 					ele.innerHTML = airline.value + " is not a valid Airline Code";											
+					airline_bool = false;
 				}
 		});
 
@@ -140,26 +152,79 @@ Airport.prototype.validate_inputs = function(){
 				if ( year.getFullYear() < 2017 || year.getFullYear() > 2017 ) {					
 						ele.style.color="red";								
 						ele.innerHTML = datetime.value + " is not a valid Date Time";						
+						datetime_bool = false;
 				}					
 				else{
 						ele.innerHTML = "";
+						datetime_bool = true;
 				}
 		});
 
-		$("#luggages").change(function(){
+		var my_flag = 0;
 
-				if 	(	$("#flow_type")[0].value != "" &&
-				$("#airport_code")[0].value != "" && 
-				$("#airline")[0].value != "" && 
-				$("#datetime")[0].value != ""  )
-		{
-				$("#add_btn_contact")[0].style.visibility ="visible";
-				$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
-		}
-			
+		$("#luggages").change(function(){
+				
+				if(	my_flag == 0 && 
+					checker_for_validity() &&
+					$("#flow_type")[0].value != "" &&
+					$("#airport_code")[0].value != "" && 
+					$("#airline")[0].value != "" && 
+					$("#datetime")[0].value != "" &&
+					$("#luggages")[0].value != ""   )
+				{
+						append_person();
+				}
+				else{								
+					if ( !flow_type_bool ) {
+						$("#flow_type").change(function(){
+							if (checker_for_validity() ) {
+							 	append_person();
+							}
+						});
+					}
+					if ( !airport_code_bool ){		
+						$("#airport_code").change(function(){														
+							if (checker_for_validity() ) {
+							 	append_person();
+							}
+						});	
+					}
+					if ( !airline_bool ){		
+						$("#airline").change(function(){													
+							if ( checker_for_validity()) {
+								 append_person();
+							}
+						});				
+					}
+					if ( !datetime_bool ) {						
+						$("#datetime").change(function(){												
+							if ( checker_for_validity() ) {
+							 	append_person();
+							}
+						});
+					}
+			}
 		});	
 
+		var checker_for_validity = function(){
+				if ( flow_type_bool &&
+						airport_code_bool &&
+							airline_bool &&
+								datetime_bool ) { 
+						return true;	
+				}
+				else false; 					
+		}
+
+		var append_person = function(){		
+				$("#btn_add_person_html")[0].style.visibility="visible";
+				my_flag=1;
+				$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
+		}
 }
+
+
+
 
 Airport.prototype.submit = function(){
 		if (this.container === null) {
