@@ -69,7 +69,7 @@
 #create_family_container,#finish_submit_btn_div,#additional_main_container{
 		visibility:hidden;
 }
-
+	
 #create_family_container,#family_report_message{
 		padding-left:25px;
 }

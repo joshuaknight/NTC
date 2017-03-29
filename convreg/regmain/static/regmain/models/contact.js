@@ -268,7 +268,7 @@ Contact.prototype.submit = function(){
 		}		
 		var p = this;
 		var tmp_process_resp_fn = function(json) {
-				contact_id = json.id;				
+				contact_id = json.id;					
 				p.process_response_contact(json);
 		};
 		this.update_values_from_field();				

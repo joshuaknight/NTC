@@ -224,6 +224,7 @@ Family.prototype.after_final_submit = function(){
 															});
 													}				 
 													swal("ThankYou!", "You wrote: " + inputValue, "success"); });
+													p.person.submit();
 													//make an ajax call to save special request message
 													trans = new Transport(); 
 													trans.render($("#transport_container")[0]);
@@ -267,10 +268,12 @@ Family.prototype.all_in_one_submit = function(){
 			alert("You need to add Person Info Before Youai can continue");
 		}
 
+		
+
 		this.airport.submit();				
 		this.contact.submit();				
-		airport_id = this.airport.id;
-		this.person.submit();
+
+		airport_id = this.airport.id;		
 }
 
 

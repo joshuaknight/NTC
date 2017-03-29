@@ -84,6 +84,7 @@ var TMPL_PERSON = '' +
 
 
 
+
 var Person = function(family_id) {
 		flag=0;
 		this.id = null;
@@ -109,23 +110,7 @@ var Person = function(family_id) {
 
 		this.add_church_btn = null;	
 		
-
-		this.html_add_special = null;
-		this.add_transport_btn = null;	
-
-		this.special_btn = null;
-		this.transport_btn = null;
-
-		this.html_transport = null;
-
-
-		this.additional_submit = null;
-
-		this.primary_contact = null;
-		this.arrival_date = null;
-		this.depature_date = null;
 		
-
 		this.church_id = null;
 		this.family_id = family_id;
 		this.contact_info_id = null;
@@ -135,7 +120,9 @@ var Person = function(family_id) {
 		this.att_type = null;
 		this.church = null;
 
-
+		this.sex_1 = null;
+		this.sex_2 = null;
+		this.sex_3 =  null;
 
 		this.container_for_appending_html_to_person = null;
 		this.html_to_be_append_for_appending_person = null;
@@ -150,46 +137,34 @@ Person.prototype.render = function(container) {
 		this.bind_inputs();				
 }
 
-Person.prototype.update_values_from_form = function() {
-		if (this.container === null) {
-				return false;	
-		}
 
-		this.first_name = this.txt_first_name.value;
-		this.last_name = this.txt_last_name.value;
-		this.sex = this.txt_sex.value;
-		this.dob = this.txt_dob.value;
-		this.att_type_id = this.vol_type_id.value;				
-		return true;
-}
 
-Person.prototype.process_response = function(json) {
-		this.first_name = json.first_name;
-		this.last_name = json.last_name;
-		this.sex = json.sex;
-		this.dob = json.dob;
-		this.id = json.id;		
-		this.update_html_fields();
-}
-
-Person.prototype.update_html_fields = function() {
-		this.txt_first_name = this.first_name;
-		this.txt_last_name = this.last_name;
-		this.txt_sex = this.sex;
-		this.txt_dob = this.dob;
-}
-
-Person.prototype.submit = function() {	
-		
-		this.contact_info_id = contact_id;		
-
+Person.prototype.submit = function(contact_info_id) {	
+					
 		this.church_id = this.church.return_id();
 
 		if (this.container === null) {
 				return false;
 		}
 
-		this.update_values_from_form();
+		this.first_name = this.txt_first_name.value;
+		this.last_name = this.txt_last_name.value;		
+		this.dob = this.txt_dob.value;
+		this.att_type_id = this.vol_type_id.value;		
+		
+		if ( this.sex_1.checked ){			
+				this.sex = this.sex_1.value;
+				console.log(this.sex_1);
+		}
+
+		if ( this.sex_2.checked ){
+				this.sex = this.sex_2.value;
+		}
+
+		if ( this.sex_3.checked ){
+				this.sex = this.sex_3.value;
+		}
+		
 		
 		p = this;
 
@@ -207,11 +182,7 @@ Person.prototype.submit = function() {
 				},
 				type: "POST",
 				dataType: "json",
-		}).done(function(json) {
-				p.process_response(json);
-		});		
-
-		
+		})
 		//p.append_person_to_html();
 }
 
@@ -226,6 +197,16 @@ Person.prototype.bind_inputs = function() {
 				'#txt_last_name')[0];
 		this.txt_sex = $(this.html_node).find(
 				'#txt_sex')[0];
+
+		this.sex_1 = $(this.html_node).find(
+				'#1')[0];
+
+		this.sex_2 = $(this.html_node).find(
+				'#2')[0];
+
+		this.sex_3 = $(this.html_node).find(
+				'#3')[0];
+
 		this.txt_dob = $(this.html_node).find(
 				'#txt_dob')[0];		
 
@@ -241,39 +222,14 @@ Person.prototype.bind_inputs = function() {
 		this.add_church_btn = $(this.html_node).find(
 			    '#add_church_btn')[0];	
 
-	
-		
-
-		this.additional_submit = $("#additional_submit")[0];
-
-
 		
 		this.add_transport_btn = $('#html_add_transport')[0];
-		this.html_add_special = $('#html_add_special')[0];
 		
-		this.special_btn = $('#special_btn')[0];
-		this.transport_btn = $('#transport_btn')[0];
-
-		this.html_transport = $("#html_add_transport")[0];
+		
 
 		var p = this;	
 
-		
-		var add_special_fn = function(){p.special_request();}
-		var add_transport_fn = function(){p.transport();}
-		
-		
-		
-		//$(this.btn_submit).on("click",function(){					
-		//			p.all_in_one_submit();
-		//			p.submit();
-		//});
-		//$(this.add_church_btn).on("click",function(){p.church_select();});		
-		//$(this.special_btn).click(add_special_fn);		
-		//$(this.transport_btn).click(add_transport_fn);
 
-		//$(this.additional_submit).click(function(){p.additional_sub();});
-		
 		p.call_me_after_person_input();
 
 }
@@ -288,8 +244,6 @@ Person.prototype.church_select = function(){
 		this.church = new Churches();				
 	    this.church.initialize(this.add_church_btn);	        
 }	
-
-
 
 
 
@@ -592,3 +546,33 @@ Person.prototype.update_fields_additional = function(){
 */
 
 
+/*
+Person.prototype.update_values_from_form = function() {
+		if (this.container === null) {
+				return false;	
+		}
+
+		this.first_name = this.txt_first_name.value;
+		this.last_name = this.txt_last_name.value;
+		this.sex = this.txt_sex.value;
+		this.dob = this.txt_dob.value;
+		this.att_type_id = this.vol_type_id.value;				
+		return true;
+}
+
+Person.prototype.process_response = function(json) {
+		this.first_name = json.first_name;
+		this.last_name = json.last_name;
+		this.sex = json.sex;
+		this.dob = json.dob;
+		this.id = json.id;		
+		this.update_html_fields();
+}
+
+Person.prototype.update_html_fields = function() {
+		this.txt_first_name = this.first_name;
+		this.txt_last_name = this.last_name;
+		this.txt_sex = this.sex;
+		this.txt_dob = this.dob;
+}
+*/
