@@ -1,3 +1,58 @@
+#my_transport_container{
+		margin-left:0px;
+		width: 630px;
+		padding-left:20px;
+		padding-top:20px;
+		padding-right:20px;
+		padding-bottom: 20px;		
+		border: 1px solid;
+		border-color: lightpink;
+		margin-bottom : 50px;
+}
+
+#transport_type_id{
+		
+		width:200px				
+}
+
+#comments_id{
+		margin-top:5px;
+		width:200px;
+}
+
+
+#submit_btn_transport{
+	margin-top:10px;
+	margin-bottom : 10px;
+}
+
+#error_arrival_and_departure{
+	color:red;
+}
+
+#arrival_departure{	
+	margin-left:10px;
+	width: 330px;
+	padding: 20px;
+	border: 1px solid;
+	border-color: lightpink;
+	margin-bottom : 50px;
+}
+
+#arrival_and_departure{
+		margin-top:20px;
+}
+
+#from_arrival_date,#finish_submit_btn_div,#to_depature_date{
+		width:200px;
+}
+
+
+#submit_arrival_and_departure{
+		margin-top:10px;
+		margin-bottom:10px;
+		margin-left:50px;
+}
 
 #finish_submit_btn{
 		padding-left:50px;

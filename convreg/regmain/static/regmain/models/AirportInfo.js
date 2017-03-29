@@ -1,3 +1,5 @@
+
+
 var Ht = ''+
 		'<div class="container" id="the_airport_container">'+
 		'<div class="row" id="my_form_airport">'+
@@ -51,29 +53,29 @@ var Ht = ''+
 
 
 var Airport = function(){
-	this.id = null;
-	this.flow_type = "";
-	this.airport_code = "";
-	this.airline = "";
-	this.datetime = null;
+		this.id = null;
+		this.flow_type = "";
+		this.airport_code = "";
+		this.airline = "";
+		this.datetime = null;
 
-	this.luggages = null;
+		this.luggages = null;
 
-	this.html_node = $(Ht)[0];
-	this.container = null;
-	
-	this.flow_type_id = null;
-	this.airport_code_id = null;
-	this.airline_id = null;
-	this.datetime_id = null;
-	this.luggages_id = null;
-	this.btn_submit = null;
+		this.html_node = $(Ht)[0];
+		this.container = null;
+		
+		this.flow_type_id = null;
+		this.airport_code_id = null;
+		this.airline_id = null;
+		this.datetime_id = null;
+		this.luggages_id = null;
+		this.btn_submit = null;
 }
 
 Airport.prototype.render = function(container){
-	this.container = container;
-	container.appendChild(this.html_node);
-	this.bind_all();
+		this.container = container;
+		container.appendChild(this.html_node);
+		this.bind_all();
 }
 
 Airport.prototype.bind_all = function(){
@@ -233,6 +235,7 @@ Airport.prototype.submit = function(){
 
 		var p = this;
 		var tmp_process_resp_fn = function(json) {
+				airport_id = json.id;
 				p.process_response(json);
 		};
 

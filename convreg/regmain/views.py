@@ -42,19 +42,15 @@ def add_family(request):
 
 @csrf.csrf_exempt
 def add_contact_info(request):
-    context = {}
-    if request.method == 'GET':
-        return shortcuts.render(
-            request, 'regmain/add_contact_info.html', context)
     if request.method == 'POST':        
-        address = request.POST.get('address')
-        cell_phone = request.POST.get('cell_phone')
-        email = request.POST.get('email')
-        telephone = request.POST.get('telephone')
+        address = request.POST['address']
+        cell_phone = request.POST['cell_phone']
+        email = request.POST['email']
+        telephone = request.POST['telephone']
 
         contact_info = models.ContactInfo(
             address=address,
-            cell_phone=cell_phone,
+            cell_phone=cell_phone,  
             email=email,
             telephone=telephone)
         contact_info.save()        
@@ -63,16 +59,6 @@ def add_contact_info(request):
 
 @csrf.csrf_exempt
 def add_person(request):
-    context = {}
-    if request.method == 'GET':
-        churches = models.Church.objects.all()
-        context['churches'] = [c.to_dict() for c in churches]
-
-        att_types = models.AttendantType.objects.all()
-        context['att_types'] = [a.to_dict() for a in att_types]
-        return shortcuts.render(
-            request, 'regmain/add_person.html', context)
-
     if request.method == 'POST':       
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -152,17 +138,20 @@ def add_special_request(request):
         x.save()
         return http.HttpResponse("Thank You")
 
+
 @csrf.csrf_exempt
 def add_transport(request):
     context = {}        
     if request.method == 'POST':
         transport_type = request.POST['transport_type']
-        airport_info = request.POST['airport_info']
+        airport_info = request.POST.get('airport_info')
         comments = request.POST['comments']
+        airport_inst = models.AirportInfo.objects.get(id = airport_info)
         x = models.Transport(transport_type = transport_type,
-            airport_info = airport_info,comments = comments)
+            airport_info = airport_inst,comments = comments)
         x.save()
-        return http.HttpResponse("Thank You")        
+        print airport_info
+        return http.JsonResponse(x.to_dict())        
 
 
 

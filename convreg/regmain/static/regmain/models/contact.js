@@ -1,4 +1,4 @@
-var contact_id = 0;
+
 
 
 var HT = ''+
@@ -239,8 +239,7 @@ Contact.prototype.update_html_fields = function(){
 
 
 Contact.prototype.process_response_contact = function(json){
-		this.id = json.id;			
-		contact_id = this.id;		
+		this.id = json.id;					
 		this.address = json.address;
 		this.cell = json.cell_phone;
 		this.email = json.email;
@@ -268,7 +267,8 @@ Contact.prototype.submit = function(){
 			return false;			
 		}		
 		var p = this;
-		var tmp_process_resp_fn = function(json) {				
+		var tmp_process_resp_fn = function(json) {
+				contact_id = json.id;				
 				p.process_response_contact(json);
 		};
 		this.update_values_from_field();				
@@ -286,10 +286,3 @@ Contact.prototype.submit = function(){
 		return true;
 }	
 
-
-
-
-Contact.prototype.return_id = function(){
-		console.log(this.container);
-		return this.container.value;
-}

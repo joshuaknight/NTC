@@ -69,6 +69,10 @@ var html_add_person_parent = $("#html_add_person_parent")[0];
 var ele_of_contact_is_valid = 0;
 var ele_of_airport_is_valid = 0;
 
+var special_request_id = 0;
+var airport_id = 0;
+var contact_id = 0;
+var transport_id = 0;
 
 function do_onload() {					
 		$(sel_btn_family_name).on("click", add_family_submit);		

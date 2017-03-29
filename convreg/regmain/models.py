@@ -88,7 +88,7 @@ class AirportInfo(models.Model):
         app_label = constants.APP_LABEL
 
     def __unicode__(self):
-        return '%s-%s' % self.id
+        return '%s' % self.id
     
     def to_dict(self):
         return {
@@ -112,6 +112,13 @@ class Transport(models.Model):
     def __unicode__(self):
         return '%s' % self.id
 
+    def to_dict(self):
+        return {
+            'id' : self.id,
+            'transport_type' : self.transport_type,
+            'airport_info' : self.airport_info.id,
+            'comments' : self.comments,
+         }
 
 class SpecialRequest(models.Model):
 

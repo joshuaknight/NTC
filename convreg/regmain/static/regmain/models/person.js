@@ -180,9 +180,9 @@ Person.prototype.update_html_fields = function() {
 }
 
 Person.prototype.submit = function() {	
-		this.contact_info_id = contact_id;
-		console.log(this.contact_info_id);
-		console.log(contact_id);
+		
+		this.contact_info_id = contact_id;		
+
 		this.church_id = this.church.return_id();
 
 		if (this.container === null) {
@@ -200,7 +200,7 @@ Person.prototype.submit = function() {
 						last_name : this.last_name,
 						dob : this.dob,
 						sex : this.sex,	
-						contact_info_id : this.contact_info_id,
+						contact_info_id : contact_id,
 						family_id : this.family_id,
 						church_id : this.church_id,
 						att_type_id : this.att_type_id,
