@@ -3,7 +3,9 @@ from django.contrib import admin
 
 from regmain import urls as regmain_urls
 
-from convreg import views
+from convreg.views import *
+
+from contact.views import *
 
 urlpatterns = [
     # Examples:
@@ -16,5 +18,8 @@ urlpatterns = [
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
     url(
-        r'^$', views.home.as_view(), name='home'),
+        r'^$', home.as_view(), name='home'),
+
+    url(
+        r'^contact/$', contact.as_view(), name='contact'),
 ]

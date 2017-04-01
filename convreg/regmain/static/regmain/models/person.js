@@ -74,18 +74,18 @@ var TMPL_PERSON = '' +
 		'		<div class="col-sm-4" id="html_att_type"> </div>'+
 		'  </div>' +
 
-	//	'  <div class="row">' +
-	//	'    <div class="col-sm-4">' +
-		//'      <input type="button" value="Submit Person" class="btn btn-success" id="btn_person_submit"/>' +
-	//	'    </div>' +
-	//	'  </div>' +
+		'  <div class="row">' +
+		'    <div class="col-sm-4">' +
+		'      <input type="button" value="Submit Person" class="btn btn-success" id="btn_person_submit"/>' +
+		'    </div>' +
+		'  </div>' +
 		'</div>'
 
 
 
 
 
-var Person = function(family_id) {
+var Person = function() {
 		flag=0;
 		this.id = null;
 
@@ -454,12 +454,55 @@ Person.prototype.call_me_after_person_input = function(){
 			}
 
 			var my_append = function(){
-					$("#finish_submit_btn_div")[0].style.visibility = "visible";
-					my_flag = 1;
-					$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
+					//$("#finish_submit_btn_div")[0].style.visibility = "visible";
+					$("#btn_person_submit").on("click",function(){
+							my_flag = 1;
+							console.log("asfas");
+							if ( check_for_validity() ) {
+								p.submit();
+								p.new_person();
+								delete p 
+							}							
+					});										
+					
+					//$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
 			}
+		
+		$("#btn_person_submit").on("click",function(){
+				my_flag = 1;
+				console.log("asfas");
+				if ( check_for_validity() ) {
+					p.submit();
+					p.new_person();					
+			}				
+		});
+
 }
 
+
+Person.prototype.new_person = function(){
+		
+		swal({   title: "Do you want to add another Family Member?",   
+				 text : "Press Yes or No",
+				 type: "info",
+				 showCancelButton: true,
+				 confirmButtonText: "Yes, Add!",
+				 cancelButtonText: "No, Continue Further",
+				 closeOnConfirm: false,   closeOnCancel: false 
+				}, 
+				function(isConfirm){ 
+					if (isConfirm) {     
+						$("#html_add_person_sec").html('');
+						add_person_html();
+						swal("Cool", "Thank you", "success");   
+					} 
+					else {
+						 $("#html_add_person_sec").html('');
+						 add_airport_html();
+					     swal("Cancelled", "Continuing Form:)", "success");   
+					 } 
+			});
+}
 
 
 
@@ -500,7 +543,26 @@ Person.prototype.call_me_after_person_input = function(){
 
 */
 
+var final_ele = function(){
 
+
+	var user_id = txt_family_name.value 
+	var password = txt_family_name.value  
+
+	var txt = "Welcome " + 
+			   txt_family_name.value +
+			   " We are pleased to inform you that the registration was  successfull, a person from our side will "+
+			   "contact you, and also if you have any queries you can contact us via email or by using the contact form "+
+			   "in our website, You can also edit your profile anytime  by loggin in with the userid and password provided "+ 
+			   "below Once again have a wonderfull day"+
+			   "     "+
+			   "#CaseSensitive"+
+			   "Userid   : user_id,"+
+			   "password : password,"+
+			   "Thank You "
+
+	$("#").append(txt);			   
+}
 
 
 

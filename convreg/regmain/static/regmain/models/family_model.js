@@ -5,9 +5,7 @@ var already_added = 0;
 var htfp='<div class="container">'+		 
 		 '<div class="row">'+
 		 '	<div class="input-group" id="family_input_block">'+
-		 '		<input type="button" value="Add Person Info" id="btn_add_person_html" class="btn btn-primary" >'+
-		 '		<input type="button" value="Add Airport Info" id="add_btn_airport" class="btn btn-primary" />'+		 
-		 '		<input type="button" value="Add Contact Info" id="add_btn_contact" class="btn btn-primary" />'+		 
+		 '		<input type="button" value="Add Person Info" id="btn_add_person_html" class="btn btn-primary" >'+		 
 		 '</div>'+		 
 		 '</div>'
 
@@ -90,18 +88,7 @@ Family.prototype.submit = function(){
 				});
 			this.airport_btn = $(this.html_person).find("#add_btn_airport")[0];			
 			this.add_btn_contact = $(this.html_person).find("#add_btn_contact")[0];
-			
-			$(this.airport_btn).on("click",function(){
-					$("#add_btn_airport")[0].style.visibility = "hidden";
-					$("#add_btn_airport").button("destroy");										
-					p.add_airport_html();
-			});
-
-			$(this.add_btn_contact).on("click",function(){
-					$("#add_btn_contact")[0].style.visibility = "hidden";
-					$("#add_btn_contact").button("destroy");					
-					p.add_contact_html();
-			});
+							
 
 			this.msg = "Successfully Created Family " + txt_family_name.value;
 			this.msg_append("green");
@@ -109,6 +96,7 @@ Family.prototype.submit = function(){
 			if ( ele_of_contact_is_valid && ele_of_airport_is_valid){
 					$("#btn_add_person_html")[0].style.visibility = "hidden";
 			}
+			p.add_contact_html();
 		}
 
 		else if ( !/^[a-zA-Z ]+$/.test($("#txt_family_name")[0].value) ) {
@@ -116,50 +104,29 @@ Family.prototype.submit = function(){
 				this.msg_append("red");
 
 		}
-
-		
-		$("#finish_submit_btn").on("click",function(){									
-				$("#finish_submit_btn_div")[0].style.visibility="hidden";
-				swal({
-					  title: "Confirm Registration",
-  					  text: "Information Cannot be Modifed later",
-  					  type: "info",
-					  showCancelButton: true,
-					  confirmButtonClass: "btn-success",
-					  confirmButtonText: "Continue",
-					  cancelButtonText: "Cancel",
-					  closeOnConfirm: false,
-					  closeOnCancel: false,					  
-					},
-					function(isConfirm) {
-					  	if (isConfirm) {
-					  		swal("Registered!", "You have Successfully registered.", "success");
-					    	p.all_in_one_submit();							
-					    	var ele_event = document.createElement('li');
-					    	var ele_event_url = document.createElement('a');
-					    	ele_event.setAttribute('id',"ele_event_li");
-					    	ele_event_url.href = "#event";
-					    	ele_event_url.innerHTML = "Add Event";
-					    	$(ele_event).append(ele_event_url);
-					    	
-					    	
-					    	
-					    	$("#navbar_to_append_special_transport").append(ele_event);				        					
-					    	$("#main_container_all").html('');
-					    	$("#additional")[0].style.visibility = 'visible';
-					  	} 					    	
-					  	else{
-							swal("Cancelled!", "Error in registration.", "error");					  		
-					  	}			
-
-					  	p.after_final_submit()		
-					});							
-		});
 }
 
-Family.prototype.after_final_submit = function(){
 
-		var p = this;
+
+var finish_submit = function(){								    						
+    	var ele_event = document.createElement('li');
+    	var ele_event_url = document.createElement('a');
+    	ele_event.setAttribute('id',"ele_event_li");
+    	ele_event_url.href = "#event";
+    	ele_event_url.innerHTML = "Add Event";
+    	$(ele_event).append(ele_event_url);
+    	
+    	$("#navbar_to_append_special_transport").append(ele_event);				        					
+    	$("#main_container_all").html('');
+    	$("#additional")[0].style.visibility = 'visible';
+		after_final_submit()		
+			
+}
+
+
+
+var after_final_submit = function(){
+		
 
 		var from_arrival = $("#from_arrival_date")[0];
 		var to_arrival =$("#to_depature_date")[0];
@@ -223,8 +190,7 @@ Family.prototype.after_final_submit = function(){
 																	special_request_id = json.id;
 															});
 													}				 
-													swal("ThankYou!", "You wrote: " + inputValue, "success"); });
-													p.person.submit();
+													swal("ThankYou!", "You wrote: " + inputValue, "success"); });													
 													//make an ajax call to save special request message
 													trans = new Transport(); 
 													trans.render($("#transport_container")[0]);
@@ -255,29 +221,22 @@ Family.prototype.after_final_submit = function(){
 
 
 Family.prototype.all_in_one_submit = function(){
-		if ( this.airport == undefined ){
-			alert("You Need to add airport info before you can continue");
-			return false;
-		}
+		
 		if ( this.contact == undefined ){
 			alert("You Need to add Contact info before you can continue");
 			return false;
 		}
 
-		if ( this.person == undefined ){
-			alert("You need to add Person Info Before Youai can continue");
-		}
-
 		
 
-		this.airport.submit();				
+		//airport.submit();				
 		this.contact.submit();				
 
-		airport_id = this.airport.id;		
+		//airport_id = this.airport.id;		
 }
 
 
-Family.prototype.add_airport_html = function(){
+var add_airport_html = function(){
 		var container = html_add_airport;
 		this.airport = new Airport()
 		this.airport.render(container);	
@@ -292,10 +251,9 @@ Family.prototype.add_contact_html = function(){
 }
 
 
-Family.prototype.add_person_html = function(family_id) {			
-		$("#html_add_person_parent").append(html_add_person_sec);
+var add_person_html = function(family_id) {					
 		flag_volunteer = 0;				
-		this.person = new Person(family_id);
+		this.person = new Person();
 		this.person.render(html_add_person_sec);
 		this.person.church_select();			
 		$("html, body").animate({ scrollTop: $("#html_add_person_sec")[0].scrollHeight}, 1000);

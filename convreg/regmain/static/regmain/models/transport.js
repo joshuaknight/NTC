@@ -1,5 +1,5 @@
 var TML_TRANSPORT = ''+
-		'<div class="container">'+
+		'<div class="container" id="transport_type_main_container">'+
 			'<div class="row" id="my_transport_container">'+
 			'	<div class="row">'+
 			'		<div class="col-sm-4">'+
@@ -165,8 +165,9 @@ Transport.prototype.update_html_fields = function(){
 }
 
 var register_event = function(){
+		$("#transport_type_main_container").html('');
 		eve = new Event();
-		eve.render()
+		eve.render($("#event_html"));
 }
 
 

@@ -15,9 +15,12 @@
 	<link href= {% static "css/ntchq.css" %} rel="stylesheet" media="screen">
 	
   </head>
+
+{% block header %}  
+
   <body>
-	  <header id="header">
-	  	
+  
+	  <header id="header">	  	
 		  <div class="navbar  navbar-fixed-top navbar-inverse">
 		    <div class="navbar-inner">
 				
@@ -41,7 +44,9 @@
 			      <div class="nav-collapse collapse">
 					     
 					      <ul class="nav">
-					        <li class="reg"><a href="{% url 'remain_single_form' %}"><i class="icon-pencil"></i> REGISTRATION</a></li>
+					        <li class="reg"><a href="{% url 'remain_single_form' %}"><i class="icon-pencil"></i> REGISTER</a></li>
+					        <li class="reg"><a href="{% url 'contact' %}"><i class="icon-coffee"></i> Contact</a></li>
+					        <!-- 
 					        <li class="arrival" ><a href="#"><i class="icon-group"></i> ARRIVAL</a></li>
 					        <li class="cafe"><a href="#"><i class="icon-coffee"></i> CAFETERIA</a></li>
 							<li class="ministries"><a href="#"><i class="icon-bookmark"></i> MINISTRIES</a></li>
@@ -64,19 +69,19 @@
 	                          </ul>
 	                        </li>
 						  </ul>
-        
+        				!-->
 			      </div>
  
 			    </div>
 	
-			
-			
+					
 			
 		    </div>
 		  </div>
 		
 	  </header> 
 	  <!-- Mast head Logo -->
+{% endblock %}
 	  <div class="row-fluid">
 		  <div class="mast-page cutout">
 			 <a href="#"><span class="image-wrap mastreg"><i class="icon-pencil mast-img"></i></a>
@@ -103,10 +108,7 @@
                     page that has links to various documents that will be of use to you. We will be
                     continuously updating this page with other resources as time permits.
                 </p>
-                <p>
-                    The help page can be found at the following URL: 
-                    <a id="ContentPlaceHolder1_HyperLink1" href="FAQ.aspx">Help &amp; FAQ</a>
-                </p>
+                                
                 <p>
                     Before starting to enter the registration forms online, please visit the help page
                     and use the following documents to guide you:</p>

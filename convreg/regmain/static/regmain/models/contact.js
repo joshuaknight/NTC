@@ -91,6 +91,7 @@ Contact.prototype.bind_all = function(){
 
 Contact.prototype.validate = function(){
 
+		var p = this;
 		var address_bool = true;
 		var cell_phone_bool = true;
 		var telephone_bool = true;
@@ -223,9 +224,11 @@ Contact.prototype.validate = function(){
 		}
 
 		var my_append = function(){
-				$("#add_btn_airport")[0].style.visibility ="visible";
 				my_flag = 1;
-				$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);		
+				p.submit();
+				$("#html_add_contact").html('');	
+				add_person_html();
+				$("html, body").animate({ scrollTop: $("#the_person_container")[0].scrollHeight}, 1000);		
 		}
 }
 

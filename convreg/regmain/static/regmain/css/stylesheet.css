@@ -1,3 +1,33 @@
+
+
+#cont_contact_form{
+		width:300px;			
+		padding:20px;
+		margin-top:100px;				
+		margin-left:400px;		
+}
+
+
+
+#event_person_div{
+		width: 150px;
+}
+
+#event_drop{
+		width: 150px;
+}
+
+#above_all{
+		background:lightgreen;
+}
+
+
+#convetion_header{
+		background:grey;
+		font-color:white;
+}
+
+
 #my_transport_container{
 		margin-left:0px;
 		width: 630px;

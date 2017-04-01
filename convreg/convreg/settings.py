@@ -25,7 +25,21 @@ SECRET_KEY = 'e-e2+2+5_ohnsb0y0(qx2g$eh#(_r_72@_*c_ygh*jhfpk$^#0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mynewrestaurant2016@gmail.com'
+EMAIL_HOST_PASSWORD = 'creative2010'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 ALLOWED_HOSTS = ['127.0.0.1:8000','conventionntc.pythonanywhere.com']
+
+
+
 
 
 # Application definition
@@ -39,7 +53,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'convreg',
     'regmain',
+    'contact',
     'rest_framework',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (

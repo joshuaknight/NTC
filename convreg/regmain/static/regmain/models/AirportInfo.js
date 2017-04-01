@@ -46,7 +46,7 @@ var Ht = ''+
 		' 		<input type="number" min="1" max="20" name="luggages" class="form-control"  id="luggages" required>'+
 		' 	</div>'+
 		' </div>'+
-		//'<input type="button" id="call_submit"  class="btn btn-success" value="Submit Airport">'+
+		'<input type="button" id="call_submit"  class="btn btn-success" value="Submit Airport">'+
 		'</div>'
 
 
@@ -87,17 +87,15 @@ Airport.prototype.bind_all = function(){
 		this.airline_id = $(this.html_node).find('#airline')[0];
 		this.datetime_id = $(this.html_node).find('#datetime')[0];
 		this.luggages_id = $(this.html_node).find('#luggages')[0];
-		//this.btn_submit = $(this.html_node).find("#call_submit")[0];
-
-		//var p = this;
-		//var submit_fn = function(){p.submit();};
-		//$(this.btn_submit).click(submit_fn);		
+		this.btn_submit = $(this.html_node).find("#call_submit")[0];
+		
 		this.validate_inputs();
 }
 
 
 Airport.prototype.validate_inputs = function(){
 		
+		var p = this;
 		var flow_type_bool = true;
 		var airport_code_bool = true;
 		var airline_bool = true;
@@ -218,10 +216,13 @@ Airport.prototype.validate_inputs = function(){
 				else false; 					
 		}
 
-		var append_person = function(){		
-				$("#btn_add_person_html")[0].style.visibility="visible";
-				my_flag=1;
-				$("html, body").animate({ scrollTop: $("#family_input_block")[0].scrollHeight}, 1000);
+		var append_person = function(){						
+				my_flag=1;				
+				$(p.btn_submit).on("click",function(){
+						p.submit();
+						$("#html_add_airport").html('');		
+						finish_submit();
+				});											
 		}
 }
 
