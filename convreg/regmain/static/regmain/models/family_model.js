@@ -113,6 +113,7 @@ var finish_submit = function(){
     	var ele_event_url = document.createElement('a');
     	ele_event.setAttribute('id',"ele_event_li");
     	ele_event_url.href = "#event";
+    	ele_event_url.onClick = "event_map_html();";
     	ele_event_url.innerHTML = "Add Event";
     	$(ele_event).append(ele_event_url);
     	

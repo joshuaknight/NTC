@@ -1,0 +1,19 @@
+{% include "base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+ 	<link rel="stylesheet" type="text/css" href="{% static 'css/article/article_css.css' %}">	
+{% endblock %} 
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+{% block content %}
+	
+	<form action="" method="post">
+	{% csrf_token %}   
+    <p>Are you sure you want to delete ?</p>
+    <button type="submit" value="Confirm" class="btn btn-danger">Confirm</button> 
+    <a class="btn btn-primary" href="{% url 'display_article' %}">Cancel</a>  
+	</form>
+
+
+{% endblock %}

@@ -74,7 +74,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Event
-        fields = ('name', 'start_date', 'end_date', 'location')
+        fields = ('id','name', 'start_date', 'end_date', 'location')
 
 
 class RegFormSerializer(serializers.HyperlinkedModelSerializer):

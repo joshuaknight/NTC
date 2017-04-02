@@ -1,0 +1,58 @@
+
+{% load bootstrap3 %}
+{% block title %}
+{% endblock %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/article/article_css.css' %}">	
+	<br /><br />
+	<div class="container">
+    <div class="panel panel-default">
+    <center>
+    <form method="get" action="">
+	   <input type="text" name="q">
+        <button type="submit" class="btn btn-primary">SEARCH</button>
+        </form>
+        </center>
+	<table class="table table-compact table-bordered">
+    <tr>
+        <th>Article Name</th>
+
+        <th>Author Name</th>                   
+       
+        <th>Publication Date</th
+    </tr>
+
+    {% for i in article %}
+    <tr> 
+         
+        <td>
+        <a href="{% url 'article_detail' i.id %}">{{ i.article_name }}</a> 
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'article_update' i.id %}">{% bootstrap_icon 'edit' %}</a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{% url 'article_delete' i.id %}">{% bootstrap_icon 'remove' %}</a>
+        </td>
+
+        <td><a href="{% url 'author_view' i.id %}">{{ i.author_name }}</a></td>     
+    
+        <td>{{ i.publ_date }}</td>
+     </tr >
+    {% endfor %}
+</table>
+</div>
+</div>
+   <center>{% bootstrap_pagination page %}</center> 
+{% endblock %}
+{% block footer %}
+
+<center>
+<h1>
+<a href="{% url 'home' %}">
+{% bootstrap_icon 'home' %}
+</a>
+</h1>
+</center>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% include "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% load django_markdown django_markdown_static %}
+{% block title %}
+{% endblock %}
+    {% block header %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/article/article_css.css' %}">
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.0.0/markdown-it.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.0.0/markdown-it.min.js"></script>
+   
+    <style type="text/css">
+        #comments{
+            width:300px;
+        }
+        #box1{
+            width:700px;
+        }
+        .reply{
+            margin-left:150px;            
+        }
+        #reply_display{
+            display:none;
+        }
+    </style>
+    {% endblock %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}	
+	<br /><br />
+	<div class="container">    
+	
+	<div class="row">
+        <div class="col sm-12">
+            <div class="panel panel-default">
+            <div class="panel-heading"> 
+                <strong>Article Name &nbsp;</strong><span id="ys">{{ article.article_name }}</span>
+            </div>   
+            <div class="panel-body content-markdown">
+                <span id="content">{{ article.content|markdown  }}</span>
+            </div>
+            <div class="panel-footer">
+                <strong>Published On </strong>&nbsp;&nbsp;<span id="ys">{{ article.publ_date }}</span>&nbsp;&nbsp;<strong>By {{ article.author_name }}</strong>
+                Share on <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}/article/detail/2'>Google+</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}/article/detail/2">
+            Facebook</a>
+            </div>
+        </div>
+    </div>
+    </div>
+         
+    {% if comment %}
+        <div class="row">
+        {% for i in comment %}     
+            <div class="col sm-3">    
+                <div class="panel panel-default" id="box1">                 
+                    <div class="panel-body">
+                        <span>{{i.comment_content|linebreaks}}</span>
+                    </div>
+                    <div class="panel-heading" id="box2">                           
+                    <strong>Commented by {{i.comment_name}} at {{ i.comment_date}}</strong>               
+                    </div>
+                    {% comment %}
+                        <div id="reply_display">
+                            <form action="" class="my_form" id="reply_form">
+                                {% csrf_token %}                                
+                                {% bootstrap_form reply_form %}
+                                <button>Reply</button>
+                            </form>
+                        </div>
+                    {% endcomment %}
+                    </div>        
+			                 
+            {% endfor %}
+            </div>
+            </div>
+        </div>        
+        {% else %}
+            <strong class="breadcrumb"><i>No Comment's be first to add a Comment</i></strong>
+            <br />
+            <br />                          
+    {% endif %}      
+    <form action="" method="post" class="form-horizontal" id="comments">
+                {% csrf_token %}
+                {% bootstrap_form form layout="inline" %}                
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>       
+    </div>
+   
+{% endblock %}
+

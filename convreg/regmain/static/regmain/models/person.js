@@ -549,19 +549,23 @@ var final_ele = function(){
 	var user_id = txt_family_name.value 
 	var password = txt_family_name.value  
 
-	var txt = "Welcome " + 
+	var txt_h = "Welcome '" + 
 			   txt_family_name.value +
-			   " We are pleased to inform you that the registration was  successfull, a person from our side will "+
-			   "contact you, and also if you have any queries you can contact us via email or by using the contact form "+
-			   "in our website, You can also edit your profile anytime  by loggin in with the userid and password provided "+ 
-			   "below Once again have a wonderfull day"+
-			   "     "+
-			   "#CaseSensitive"+
-			   "Userid   : user_id,"+
-			   "password : password,"+
-			   "Thank You "
+			   "' We are pleased to inform you that the registration was  successfull,"
 
-	$("#").append(txt);			   
+	var txt_p = "A person from our side will "+
+			    "contact you, and also if you have any queries you can contact us via email or by using the contact form "+
+			    "in our website"+
+			    " Thank You "			   
+
+	var ele_h=document.createElement('h3');
+	var ele_p=document.createElement('p');
+	ele_h.innerHTML = txt_h;
+	ele_h.setAttribute('id','ele_header_thankyou');
+	ele_p.setAttribute('id','ele_para_thankyou');
+	ele_p.innerHTML = txt_p;
+	$("#add_personal_note").append(ele_h);			   
+	$("#add_personal_note").append(ele_p);			   
 }
 
 

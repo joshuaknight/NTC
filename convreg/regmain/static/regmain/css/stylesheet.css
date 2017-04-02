@@ -1,4 +1,31 @@
+#delete_div{
+		margin-top:200px;
+		margin-left:400px;
+}
 
+#confirm_delete,#cancel_delete{
+		margin-left:10px;
+		padding:10px;
+}
+	
+#ele_header_thankyou{
+	width:300px;
+	color:blue;
+}
+
+#ele_para_thankyou{
+	width:300px;
+	color:red;
+}	
+
+#call_submit,#call_submit_contact{
+	 	margin-top:10px;
+}
+
+
+#select_event_list{
+		width: 150px;
+}
 
 #cont_contact_form{
 		width:300px;			

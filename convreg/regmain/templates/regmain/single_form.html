@@ -21,13 +21,14 @@
     
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="navbar_to_append_special_transport">        
+        <li id="create_home_url"> <a href="{% url 'home' %}" style="color:white;">Home</a></li>
         <li id="create_family_url"> <a href="#register" style="color:white;" onclick="create_family();">Create Family</a></li>         
       </ul>
       <div class="navbar-form navbar-left">
         <div class="form-group" id= "search_family_url">
           <input type="text"  class="form-control" id="txt_rock_family_name" 
           				name="txt_rock_family_name" placeholder="Search Family">        
-        	<button type="submit" style="color:red;"  id="btn_rock_family_name" name="btn_rock_family_name" class="btn btn-primary">Search</button>
+        	<button type="submit" style="color:red;"  id="btn_rock_family_name" name="btn_rock_family_name" class="btn btn-primary">Search</button>        
         </div>
       
       <ul class="nav navbar-nav navbar-right">
@@ -40,14 +41,19 @@
 <center>
 <div id="above_all" >
 
+
+
 <div class="row" id="finish_submit_btn_div" >
 					<input type="button" id="finish_submit_btn" name="finish_submit_btn" class="btn btn-success" 
 							value="Continue and Finish" />
 		</div>	
 
 <div class="row" id="event_html">
-	
 </div>		
+
+<div class="row" id="add_personal_note">
+	
+</div>
 
 <div class="container convreg-container" id="main_container_all">
 	<div class="row" id="main_container">

@@ -219,9 +219,11 @@ Airport.prototype.validate_inputs = function(){
 		var append_person = function(){						
 				my_flag=1;				
 				$(p.btn_submit).on("click",function(){
+					if ( checker_for_validity() ){
 						p.submit();
 						$("#html_add_airport").html('');		
 						finish_submit();
+					}
 				});											
 		}
 }

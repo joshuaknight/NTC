@@ -119,7 +119,7 @@ function search_family() {
 
 			$("#search_family_add_person_list").on("click",function(){					
 					$.ajax({
-							url : '/regmain/family_person_list/'+$(sear_txt_family)[0].value,
+							url : '/regmain/family_person_list/'+$(sear_txt_family)[0].lsvalue,
 							type :'GET',
 							dataType :'json',						
 					}).done(function(json){																									
@@ -209,6 +209,11 @@ function all_in_one_validation(){
 		});
 }
 
+
+function event_map_html(){
+		eve = new Event();
+		eve.render($("#event_html"));
+}
 
 do_onload();
 

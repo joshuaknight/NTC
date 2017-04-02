@@ -54,8 +54,11 @@ INSTALLED_APPS = (
     'convreg',
     'regmain',
     'contact',
+    'Article',
     'rest_framework',
     'bootstrap3',
+    'pagedown',
+    'django_markdown',
 )
 
 MIDDLEWARE_CLASSES = (

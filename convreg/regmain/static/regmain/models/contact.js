@@ -39,7 +39,7 @@ var HT = ''+
 		' 	</div>'+
 		'	<div id="errormsg_for_email"> </div>'+
 		' </div>'+
-		//'<input type="button" id="call_submit"  class="btn btn-success" value="Submit Contact">'+				
+		'<input type="button" id="call_submit_contact"  class="btn btn-success" value="Submit Contact">'+				
 		'</div>'	
 
 
@@ -80,7 +80,7 @@ Contact.prototype.bind_all = function(){
 		this.email_id = $(this.html_node).find("#email_id")[0];
 		this.telephone_id = $(this.html_node).find("#telephone_id")[0];
 		
-		this.btn_ = $("#call_submit")[0];
+		this.btn_ = $("#call_submit_contact")[0];
 		
 		p = this;	
 		
@@ -225,10 +225,15 @@ Contact.prototype.validate = function(){
 
 		var my_append = function(){
 				my_flag = 1;
-				p.submit();
-				$("#html_add_contact").html('');	
-				add_person_html();
-				$("html, body").animate({ scrollTop: $("#the_person_container")[0].scrollHeight}, 1000);		
+
+				$(p.btn_).on("click",function(){
+					if ( checker_for_validity ){										
+						p.submit();
+						$("#html_add_contact").html('');	
+						add_person_html();				
+						$("html, body").animate({ scrollTop: $("#the_person_container")[0].scrollHeight}, 1000);		
+					}
+				});				
 		}
 }
 

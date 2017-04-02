@@ -6,7 +6,9 @@ var TML_TRANSPORT = ''+
 			'			<label>Transport Type</label>'+
 			'		</div>'+
 			'		<div class="col-sm-4">'+
-			'			<input type="text" class="form-control" name="transport_type" id="transport_type_id">'+
+			'			<select class="form-control" id="transport_type_id">'+
+			'			<option>Airway</option>'+
+			'			</select>'+	
 			'		</div>'+				
 			'		<div class="col-sm-4" id="error_for_transport_type"> </div>'+		
 			'	</div>'+					
@@ -166,8 +168,7 @@ Transport.prototype.update_html_fields = function(){
 
 var register_event = function(){
 		$("#transport_type_main_container").html('');
-		eve = new Event();
-		eve.render($("#event_html"));
+		final_ele();
 }
 
 
