@@ -1,0 +1,49 @@
+#article_style{
+		margin-left:300px;
+}
+
+#add_comment{
+		margin-top: 10px;
+}
+
+#comment_content{
+		resize: none;
+}
+
+
+#comments{
+	margin-left:300px;
+}
+
+
+#delete_div{
+		margin-top:200px;
+		margin-left:400px;
+}
+
+#confirm_delete,#cancel_delete{
+		margin-left:10px;
+		padding:10px;
+}
+
+#id_author_name,#id_article_name{
+	margin-left:10px;
+}
+
+#ys{
+    color:red;
+}
+.panel-body{
+    background-color:lightgrey;                
+}
+#content{
+    word-spacing:5px;
+    padding:10px;
+}
+	
+.arrow-container{
+		font-size:50px;
+
+	}
+
+	

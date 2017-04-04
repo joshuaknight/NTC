@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+	Contact
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block main_content %}
+
+{% bootstrap_form_errors form %}
+<div class="breadcrumb"  id="cont_contact_form"> 
+	<form class="form-horizontal" id="contact_form" action="" method="post">
+		{% csrf_token %}
+		{% bootstrap_form form layout='inline' %}
+		{% buttons submit='send' reset='cancel'%}
+		{% endbuttons %}
+	</form>
+</div>	
+
+
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "regmain/css/stylesheet.css" %} />
+
+
+{% endblock %}

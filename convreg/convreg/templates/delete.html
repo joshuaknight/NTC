@@ -1,0 +1,19 @@
+{% include "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% block header %}
+ 	
+{% endblock %} 
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+{% block content %}
+	
+	<form action="" method="post" id="delete_div">
+	{% csrf_token %}   
+    <p>Are you sure you want to delete ?</p>
+    <button id="confirm_delete" type="submit" value="Confirm" class="btn btn-danger">Confirm</button> 
+    <a id="Cancel_delete" class="btn btn-primary" href="{% url 'display_article' %}">Cancel</a>  
+	</form>
+
+
+{% endblock %}

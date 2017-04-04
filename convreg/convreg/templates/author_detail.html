@@ -1,0 +1,36 @@
+{% include "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% load django_markdown django_markdown_static %}
+{% block title %}
+{% endblock %}
+    {% block header %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/article/article_css.css' %}">
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.0.0/markdown-it.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.0.0/markdown-it.min.js"></script>
+    {% endblock %}
+{% load static %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}	
+	<br /><br />
+	<div class="container">    
+	   <div class="row">
+           <dir class="col col-3">
+            {% for i in author %}
+                <p>{{i.author_name}}</p>
+            {% endfor %}            
+           </dir>
+       </div>
+	
+{% endblock %}
+{% block footer %}
+
+<center>
+<a class="arrow-container" href="{% url 'display_article' %}">
+{% bootstrap_icon 'arrow-left' %}
+</a>
+</center>
+{% endblock %}

@@ -1,0 +1,217 @@
+#add_event_url{
+		visibility: hidden;
+}
+
+#delete_div{
+		margin-top:200px;
+		margin-left:400px;
+}
+
+#confirm_delete,#cancel_delete{
+		margin-left:10px;
+		padding:10px;
+}
+	
+#ele_header_thankyou{
+	width:300px;
+	color:blue;
+}
+
+#ele_para_thankyou{
+	width:300px;
+	color:red;
+}	
+
+#call_submit,#call_submit_contact{
+	 	margin-top:10px;
+}
+
+
+#select_event_list{
+		width: 150px;
+}
+
+#cont_contact_form{
+		width:300px;			
+		padding:20px;
+		margin-top:100px;				
+		margin-left:400px;		
+}
+
+
+
+#event_person_div{
+		width: 150px;
+}
+
+#event_drop{
+		width: 150px;
+}
+
+#above_all{
+		background:lightgreen;
+}
+
+
+#convetion_header{
+		background:grey;
+		font-color:white;
+}
+
+
+#my_transport_container{
+		margin-left:0px;
+		width: 630px;
+		padding-left:20px;
+		padding-top:20px;
+		padding-right:20px;
+		padding-bottom: 20px;		
+		border: 1px solid;
+		border-color: lightpink;
+		margin-bottom : 50px;
+}
+
+#transport_type_id{
+		
+		width:200px				
+}
+
+#comments_id{
+		margin-top:5px;
+		width:200px;
+}
+
+
+#submit_btn_transport{
+	margin-top:10px;
+	margin-bottom : 10px;
+}
+
+#error_arrival_and_departure{
+	color:red;
+}
+
+#arrival_departure{	
+	margin-left:10px;
+	width: 330px;
+	padding: 20px;
+	border: 1px solid;
+	border-color: lightpink;
+	margin-bottom : 50px;
+}
+
+#arrival_and_departure{
+		margin-top:20px;
+}
+
+#from_arrival_date,#finish_submit_btn_div,#to_depature_date{
+		width:200px;
+}
+
+
+#submit_arrival_and_departure{
+		margin-top:10px;
+		margin-bottom:10px;
+		margin-left:50px;
+}
+
+#finish_submit_btn{
+		padding-left:50px;
+		padding-right:50px;
+		font-size:25px;
+		margin-left:20px;
+}
+
+.navbar{		
+		padding-left:30px;
+		padding-right:10px;		
+}
+
+#create_family_container,#finish_submit_btn_div,#additional_main_container{
+		visibility:hidden;
+}
+	
+#create_family_container,#family_report_message{
+		padding-left:25px;
+}
+
+.form-control{
+		padding-top:20px;
+		padding-bottom:20px;
+}
+
+
+#add_btn_airport,#btn_add_person_html{
+		margin-right:20px;
+}
+
+
+#html_add_person_sec,#html_add_airport,#html_add_contact{
+		margin-top:50px;
+		margin-bottom:50px;
+}
+
+
+
+
+#the_airport_container{
+  		width: 650px;
+  		padding: 20px;
+  		border: 1px solid;
+  		border-color: lightpink;
+  		margin-bottom : 50px;
+  		margin-left:50px;			
+}
+
+#my_form_airport{
+		margin-top:10px;
+}
+
+#btn_add_person_html,#add_btn_airport{
+		visibility: hidden;
+}
+
+
+textarea {
+    resize: none;
+}
+
+
+
+#my_form_person{
+		margin-top:10px;
+	
+}
+
+#the_person_container{								
+  		width: 650px;
+  		padding: 20px;
+  		border: 1px solid;
+  		border-color: lightgreen;
+  		margin-bottom : 100px;
+  		margin-left:50px;
+}
+
+
+#the_contact_container{
+  		width: 650px;
+  		padding: 20px;
+  		border: 1px solid;
+  		border-color: lightgrey;
+  		margin-bottom : 50px;		
+  		margin-left:50px;
+}
+
+#my_form_contact{
+		margin-top:10px;
+}
+
+#txt_family_name{
+	width:250px;
+	margin-right:20px;
+}
+
+#btn_family_name{
+	width:150px;
+}
+
